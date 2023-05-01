@@ -82,7 +82,7 @@
 
     <div class = 'row px-xl-5 middle'>
 
-        <form class = 'form-group' action="./includes/register.ini.php" method = "POST">
+        <form class = 'form-group' action="includes/register.inc.php" method = "POST">
                 <div class="col-md-6 form-group">
                     <label>Fullname</label>
                     <input name = 'fullname' class="form-control" type="text" placeholder="John Doe">
