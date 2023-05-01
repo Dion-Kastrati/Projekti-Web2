@@ -1,3 +1,5 @@
+<?php include_once './db/db-inc.php';?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,66 +28,10 @@
 </head>
 <body>
 
-
-    <!-- Topbar Start -->
-    <div class="container-fluid">
-        <div class="row bg-secondary py-2 px-xl-5">
-            <div class="col-lg-6 d-none d-lg-block">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-dark" href="">FAQs</a>
-                    <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="">Help</a>
-                    <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="">Support</a>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a class="text-dark pl-2" href="">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="row align-items-center py-3 px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <a href="" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">e</span>Library</h1>
-                </a>
-            </div>
-            <div class="col-lg-6 col-6 text-left">
-                <form action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Topbar End -->
-
-
     <!-- Navbar Start -->
     <div class="container-fluid">
         <div class="row border-top px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
+            <div class="col-lg-3 d-none d-lg-block" style = 'display: hidden'>
                 <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
                     <h6 class="m-0">Categories</h6>
                     <i class="fa fa-angle-down text-dark"></i>
@@ -136,20 +82,32 @@
 
     <div class = 'row px-xl-5 middle'>
 
-        <!-- <form action=''> -->
+        <form class = 'form-group' action="./includes/register.ini.php" method = "POST">
+                <div class="col-md-6 form-group">
+                    <label>Fullname</label>
+                    <input name = 'fullname' class="form-control" type="text" placeholder="John Doe">
+                </div>
+                
+                <div class="col-md-6 form-group">
+                    <label>Email</label>
+                    <input name='email' class="form-control" type="text" placeholder="johndoe23@example.com">
+                </div>
+
+
                 <div class="col-md-6 form-group">
                     <label>Username</label>
-                    <input class="form-control" type="text" placeholder="Username">
+                    <input name='username' class="form-control" type="text" placeholder="johndoe23">
                 </div>
 
                 <div class="col-md-6 form-group">
                     <label>Password</label>
-                    <input class="form-control" type="password" placeholder="Password">
+                    <input name='password' class="form-control" type="password" placeholder="Password">
                 </div>
 
+                
             <div class='col-md-6 form-group '>
                 <label>Role</label>
-                <select class='custom-select'>    
+                <select name = 'role' class='custom-select'>    
                     <option selected>Normal User</option>
                     <option>Admin</option>
                 </select>
@@ -157,11 +115,11 @@
 
 
             <div class="card-footer border-secondary bg-transparent login">
-                        <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign in</button>
+                        <button type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign up</button>
             </div>
 
 
-        <!-- </form> -->
+        </form>
 
     </div>
 
