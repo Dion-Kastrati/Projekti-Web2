@@ -153,6 +153,13 @@
                     <option>Admin</option>
                 </select>
             </div>
+
+
+            <div class='col-md-6 form-group'>
+                <input type="submit" value = 'Submit'>
+            </div>
+
+
         </form>
 
     </div>
