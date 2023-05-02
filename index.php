@@ -217,7 +217,7 @@
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right">15 Products</p>
                     <a href="" class="cat-img position-relative overflow-hidden mb-3">
-                        <img class="img-fluid" src="img/cat-1.jpg" alt="">
+                        <img class="img-fluid" src="https://jcpenney.scene7.com/is/image/jcpenneyimages/slim-cf238c2b-66f3-4df9-9683-3eb7c39ae08b?scl=1&qlt=75" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0">Men's dresses</h5>
                 </div>

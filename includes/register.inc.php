@@ -19,6 +19,7 @@
         }
 
         //TODO: Add a function that checks if the email is already used
+        //TODO: Username unik
 
     $sql = "INSERT INTO tblusers(user_id, username, fullname, email, user_role,  hashedPassword, reg_date)
             values ('$nextID' ,'$username', '$fullname', '$email', '$role', '$hashedPassword', '$date');";
