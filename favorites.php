@@ -101,10 +101,11 @@
                 </a>
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                        <a href="" class="nav-item nav-link">Action</a>
-                        <a href="" class="nav-item nav-link">Thriller</a>
-                        <a href="" class="nav-item nav-link">Fantasy</a>
-                        <a href="" class="nav-item nav-link">Mister</a>
+                    <a href="novel.php" class="nav-item nav-link">Novel</a>
+                        <a href="action.php" class="nav-item nav-link">Action</a>
+                        <a href="thriller.php" class="nav-item nav-link">Thriller</a>
+                        <a href="fantasy.php" class="nav-item nav-link">Fantasy</a>
+                        <a href="mister.php" class="nav-item nav-link">Mister</a>
                     </div>
                 </nav>
             </div>

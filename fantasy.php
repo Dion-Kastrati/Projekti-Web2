@@ -107,8 +107,8 @@
                 </a>
                 <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
                     id="navbar-vertical">
-                    <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                    <a href="novel.php" class="nav-item nav-link">Novel</a>
+                    <div class="navbar-nav w-100 overflow-hidden" style="height: 205px">
+                        <a href="novel.php" class="nav-item nav-link">Novel</a>
                         <a href="action.php" class="nav-item nav-link">Action</a>
                         <a href="thriller.php" class="nav-item nav-link">Thriller</a>
                         <a href="fantasy.php" class="nav-item nav-link">Fantasy</a>
@@ -145,47 +145,50 @@
                         </div>
                     </div>
                 </nav>
-                <div id="header-carousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active" style="height: 410px;">
-                            <img class="img-fluid" src="img/carousel-1.jpg" alt="Image">
-                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style="max-width: 700px;">
-                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First
-                                        Order</h4>
-                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
-                                    <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item" style="height: 410px;">
-                            <img class="img-fluid" src="img/carousel-2.jpg" alt="Image">
-                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style="max-width: 700px;">
-                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First
-                                        Order</h4>
-                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Reasonable Price</h3>
-                                    <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
-                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
-                            <span class="carousel-control-prev-icon mb-n2"></span>
-                        </div>
-                    </a>
-                    <a class="carousel-control-next" href="#header-carousel" data-slide="next">
-                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
-                            <span class="carousel-control-next-icon mb-n2"></span>
-                        </div>
-                    </a>
+                <div>
+                    
                 </div>
             </div>
         </div>
     </div>
     <!-- Navbar End -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">Fantasy</span></h2>
+        </div>
+        <div class="row px-xl-5 pb-3">
+            <?php
 
+            $sql1 = "
+                            select *
+                            from tblbooks 
+                            WHERE genre=4;
+                    ";
+            $results = mysqli_query($conn, $sql1);
+            $resultsCheck = mysqli_num_rows($results);
+            if ($resultsCheck > 0) {
+                while ($row = mysqli_fetch_assoc($results)) { // Krejt te dhenat qe i kemi marr prej $results me i rujt si varch te $row
+            
+                    echo "<div class='col-lg-3 col-md-6 col-sm-12 pb-1'>
+                            <div class='card product-item border-0 mb-4'>
+                                <div class='card-header product-img position-relative overflow-hidden bg-transparent border p-0'>
+                                    <img style = 'height: 500px' class='img-fluid w-100' src=" . $row['book_photo'] . " alt=''>
+                                </div>
+                                <div class='card-body border-left border-right text-center p-0 pt-4 pb-3'>
+                                    <h6 class='text-truncate mb-3'>" . $row['book_title'] . "</h6>
+                                    <div class='d-flex justify-content-center'>
+                                        <h6>" . $row['price'] . "€</h6>
+                                    </div>
+                                </div>
+                                <div class='card-footer d-flex justify-content-between bg-light border'>
+                                    <a href='' class='btn btn-sm text-dark p-0'><i class='fas fa-shopping-cart text-primary mr-1'></i>Add To Cart</a>
+                                </div>
+                            </div>
+                        </div>";
+                }
+
+            }
+            ?>
 
     <!-- Featured Start -->
     <div class="container-fluid pt-5">
@@ -217,25 +220,7 @@
         </div>
     </div>
     <!-- Featured End -->
-
-
-    <!-- Categories Start -->
-    <div class="container-fluid pt-5">
-        <div class="row px-xl-5 pb-3">
-            <div class="col-lg-4 col-md-6 pb-1">
-                <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                    <p class="text-right">15 Products</p>
-                    <a href="" class="cat-img position-relative overflow-hidden mb-3">
-                        <img class="img-fluid" src="img/cat-1.jpg" alt="">
-                    </a>
-                    <h5 class="font-weight-semi-bold m-0">Men's dresses</h5>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-
+    
 
     <!-- Products Start -->
     <div class="container-fluid pt-5">
@@ -248,7 +233,7 @@
             $sql = "
                             select *
                             from tblbooks
-                            WHERE arrival_date >= (SELECT addDate(curdate(), INTERVAL -7 day));
+                            WHERE arrival_date >= (SELECT addDate(curdate(), INTERVAL -7 day)) AND genre=4;
                     ";
             $results = mysqli_query($conn, $sql);
             $resultsCheck = mysqli_num_rows($results);
@@ -275,42 +260,6 @@
 
             }
             ?>
-
-            <!-- Vendor Start -->
-            <div class="container-fluid py-5">
-                <div class="row px-xl-5">
-                    <div class="col">
-                        <div class="owl-carousel vendor-carousel">
-                            <div class="vendor-item border p-4">
-                                <img src="img/vendor-1.jpg" alt="">
-                            </div>
-                            <div class="vendor-item border p-4">
-                                <img src="img/vendor-2.jpg" alt="">
-                            </div>
-                            <div class="vendor-item border p-4">
-                                <img src="img/vendor-3.jpg" alt="">
-                            </div>
-                            <div class="vendor-item border p-4">
-                                <img src="img/vendor-4.jpg" alt="">
-                            </div>
-                            <div class="vendor-item border p-4">
-                                <img src="img/vendor-5.jpg" alt="">
-                            </div>
-                            <div class="vendor-item border p-4">
-                                <img src="img/vendor-6.jpg" alt="">
-                            </div>
-                            <div class="vendor-item border p-4">
-                                <img src="img/vendor-7.jpg" alt="">
-                            </div>
-                            <div class="vendor-item border p-4">
-                                <img src="img/vendor-8.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Vendor End -->
-
 
             <!-- Footer Start -->
             <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
