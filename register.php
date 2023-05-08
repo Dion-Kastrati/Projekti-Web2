@@ -1,7 +1,8 @@
-<?php include_once './db/db-inc.php';?>
+<?php include_once './db/db-inc.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>eLibrary</title>
@@ -15,7 +16,8 @@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -26,68 +28,25 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
+
 <body>
 
     <!-- Navbar Start -->
-    <div class="container-fluid">
-        <div class="row border-top px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block" style = 'display: hidden'>
-                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
-                    <h6 class="m-0">Categories</h6>
-                    <i class="fa fa-angle-down text-dark"></i>
-                </a>
-                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
-                    <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                        <a href="" class="nav-item nav-link">Action</a>
-                        <a href="" class="nav-item nav-link">Thriller</a>
-                        <a href="" class="nav-item nav-link">Fantasy</a>
-                        <a href="" class="nav-item nav-link">Mister</a>
-                    </div>
-                </nav>
-            </div>
-            <div class="col-lg-9">
-                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                    <a href="" class="text-decoration-none d-block d-lg-none">
-                        <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
-                    </a>
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
-                            <a href="index.php" class="nav-item nav-link">Home</a>
-                            <a href="shop.php" class="nav-item nav-link">Books</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="cart.php" class="dropdown-item">Shopping Cart</a>
-                                    <a href="favorites.php" class="dropdown-item">Favorites</a>
-                                    <a href="checkout.php" class="dropdown-item">Checkout</a>
-                                </div>
-                            </div>
-                            <a href="contact.php" class="nav-item nav-link">Contact</a>
-                        </div>
-                        <div class="navbar-nav ml-auto py-0">
-                            <a href="login.php" class="nav-item nav-link">Login</a>
-                            <a href="register.php" class="nav-item nav-link">Register</a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
+    <?php
+    include 'includes/navbar.php';
+    ?>
     <!-- Navbar End -->
 
-    <div class = 'container-fluid pt-5'>
+    <div class='container-fluid pt-5'>
 
-    <div class = 'row px-xl-5 middle'>
+        <div class='row px-xl-5 middle'>
 
-        <form class = 'form-group' action="includes/register.inc.php" method = "POST">
+            <form class='form-group' action="includes/register.inc.php" method="POST">
                 <div class="col-md-6 form-group">
                     <label>Fullname</label>
-                    <input name = 'fullname' class="form-control" type="text" placeholder="John Doe">
+                    <input name='fullname' class="form-control" type="text" placeholder="John Doe">
                 </div>
-                
+
                 <div class="col-md-6 form-group">
                     <label>Email</label>
                     <input name='email' class="form-control" type="text" placeholder="johndoe23@example.com">
@@ -104,27 +63,29 @@
                     <input name='password' class="form-control" type="password" placeholder="Password">
                 </div>
 
-                
-            <div class='col-md-6 form-group '>
-                <label>Role</label>
-                <select name = 'role' class='custom-select'>    
-                    <option selected>Normal User</option>
-                    <option>Admin</option>
-                </select>
-            </div>
+
+                <div class='col-md-6 form-group '>
+                    <label>Role</label>
+                    <select name='role' class='custom-select'>
+                        <option selected>Normal User</option>
+                        <option>Admin</option>
+                    </select>
+                </div>
 
 
-            <div class="card-footer border-secondary bg-transparent login">
-                        <button type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign up</button>
-            </div>
+                <div class="card-footer border-secondary bg-transparent login">
+                    <button type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign
+                        up</button>
+                </div>
 
 
-        </form>
+            </form>
+
+        </div>
 
     </div>
 
-    </div>
 
-    
 </body>
+
 </html>

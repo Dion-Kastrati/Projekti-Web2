@@ -1,6 +1,6 @@
 <?php 
 
-$dbServerName = "localhost:3307";
+$dbServerName = "localhost:3308";
 $dbUsername = "root";
 $dbPassword = "";
 $dbName = "web2-database";
