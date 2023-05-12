@@ -1,37 +1,50 @@
 <?php 
-    include_once '../db/db-inc.php';
-    
-        $username = $_POST['username'];
-        $fullname = $_POST['fullname'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $role = $_POST['role'];
 
+    if(isset($_POST['submit'])){
 
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $date = date('Y-m-d');
+        $fullname = $_POST["fullname"];
+        $username = $_POST["username"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $pwdRepeat = $_POST["pwdrepeat"];
+        $userRole = "Normal User";
+        $adminRole = "Admin";
 
-        $checkQuery = " SELECT *
-                        FROM tblusers
-                        WHERE username = '$username'
-                        OR email = '$email';";
-        
-        $chckResults = mysqli_query($conn, $checkQuery);
-        $count = mysqli_num_rows($chckResults);
+        include_once '../db/db-inc.php';
+        include_once 'functions.ini.php';
 
-        if($count == 0) {
-            $sql = "INSERT INTO tblusers(user_id, username, fullname, email, user_role,  hashedPassword, reg_date)
-            values ('$nextID' ,'$username', '$fullname', '$email', '$role', '$hashedPassword', '$date');";
-            mysqli_query($conn, $sql);
-            header('Location: ../index.php'); 
-        }
-        else{
-            echo "
-                <script> 
-                    alert('Username or email aready used!');
-                </script>
-            ";
-            header('Location: ../register.php');
+        if(emptyInputSignup($fullname, $username, $email, $password, $pwdRepeat) !== false){
+            header("location: ../register.php?error=emptyinput");
+            exit();
         }
 
-?>
+        if(invalidUsername($username) !== false){
+            header("location: ../register.php?error=invalidusername");
+            exit();
+        }
+
+        if(invalidEmail($email) !== false){
+            header("location: ../register.php?error=invalidemail");
+            exit();
+        }
+
+        if(pwdMatch($password, $pwdRepeat) !== false){
+            header("location: ../register.php?passwordsdontmatch");
+            exit();
+        }
+        if(usernameExist($conn, $username) !== false){
+            header("location: ../register.php?error=usernametaken");
+            exit();
+        }
+        if(emailExist($conn, $email) !== false){
+            header("location: ../register.php?error=emailtaken");
+            exit();
+        }
+
+        createUser($conn, $username, $fullname, $email, $password, $user_role);
+
+    }
+    else{
+        header("location: ../index.php");
+        exit();
+    }

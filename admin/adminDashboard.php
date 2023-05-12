@@ -1,3 +1,5 @@
+<?php include '../db/db-inc.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -72,9 +74,9 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.html">Login</a>
-                                            <a class="nav-link" href="register.html">Register</a>
-                                            <a class="nav-link" href="password.html">Forgot Password</a>
+                                            <a class="nav-link" href="../login.php">Login</a>
+                                            <a class="nav-link" href="../register.php">Register</a>
+                                            <a class="nav-link" href="../includes/resetPassword.php">Forgot Password</a>
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
@@ -103,7 +105,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        <?php echo $fullname; ?>
                     </div>
                 </nav>
             </div>

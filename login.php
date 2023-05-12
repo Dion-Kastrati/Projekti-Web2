@@ -27,11 +27,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-    <style>
-        #warning {
-            display: none;
-        }
-    </style>
+
 </head>
 
 <body>
@@ -56,17 +52,13 @@
 
             <form  class = 'form-group' action='includes/login.inc.php' method = 'POST'>
             <div class="col-md-6 form-group">
-                <label>Username</label>
-                <input require name='username' class="form-control" type="text" placeholder="johndoe23">
+                <label for = "username">Username</label>
+                <input id = "username" name='username' class="form-control" type="text" placeholder="johndoe23">
             </div>
 
             <div class="col-md-6 form-group">
-                <label>Password</label>
-                <input require name='password' class="form-control" type="password" placeholder="Password">
-            </div>
-
-            <div class="col-md-6 form-group">
-                <p id = "warning">Incorrect username or password</p>
+                <label for="pwd">Password</label>
+                <input id="pwd" name='password' class="form-control" type="password" placeholder="Password">
             </div>
 
             <div class="card-footer border-secondary bg-transparent login">

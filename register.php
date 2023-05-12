@@ -45,37 +45,30 @@ include_once './db/db-inc.php';
 
             <form class='form-group' action="includes/register.inc.php" method="POST">
                 <div class="col-md-6 form-group">
-                    <label>Fullname</label>
-                    <input require name='fullname' class="form-control" type="text" placeholder="John Doe">
+                    <label for="fullname">Fullname</label>
+                    <input id="fullname" name='fullname' class="form-control" type="text" placeholder="John Doe">
                 </div>
 
                 <div class="col-md-6 form-group">
-                    <label>Email</label>
-                    <input require name='email' class="form-control" type="email" placeholder="johndoe23@example.com">
+                    <label for="email">Email</label>
+                    <input id="email" name='email' class="form-control" type="email" placeholder="johndoe23@example.com">
                 </div>
 
 
                 <div class="col-md-6 form-group">
-                    <label>Username</label>
-                    <input require name='username' class="form-control" type="text" placeholder="johndoe23">
+                    <label for="username">Username</label>
+                    <input id="username" name='username' class="form-control" type="text" placeholder="johndoe23">
                 </div>
 
                 <div class="col-md-6 form-group">
-                    <label>Password</label>
-                    <input require name='password' class="form-control" type="password" placeholder="Password">
+                    <label for="pwd">Password</label>
+                    <input id="pwd" name='password' class="form-control" type="password" placeholder="Password">
                 </div>
 
 
                 <div class='col-md-6 form-group '>
-                    <label>Role</label>
-                    <select name='role' class='custom-select'>
-                        <option selected>Normal User</option>
-                        <option>Admin</option>
-                    </select>
-                </div>
-
-                <div style = 'color: red;'  class='col-md-6 form-group'>
-                    <p name='message' id = 'warning'></p>
+                    <label for = "pwdrepeat">Repeat password</label>
+                    <input id = "pwdrepeat" type="password" name="pwdrepeat" class="form-control" type="password" placeholder="Repeat password">
                 </div>
 
                 <div class="card-footer border-secondary bg-transparent login">
