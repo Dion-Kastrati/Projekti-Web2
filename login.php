@@ -1,3 +1,5 @@
+<?php include_once './db/db-inc.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,15 +49,15 @@
 
         <div class='row px-xl-5 middle'>
 
-            <!-- <form action=''> -->
+            <form  class = 'form-group' action='includes/login.inc.php' method = 'POST'>
             <div class="col-md-6 form-group">
                 <label>Username</label>
-                <input class="form-control" type="text" placeholder="Username">
+                <input require name='username' class="form-control" type="text" placeholder="johndoe23">
             </div>
 
             <div class="col-md-6 form-group">
                 <label>Password</label>
-                <input class="form-control" type="password" placeholder="Password">
+                <input require name='password' class="form-control" type="password" placeholder="Password">
             </div>
 
             <div class='col-md-6 form-group '>
@@ -67,13 +69,12 @@
             </div>
 
 
-
             <div class="card-footer border-secondary bg-transparent login">
-                <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign in</button>
+                <button type='submit' class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign in</button>
             </div>
 
 
-            <!-- </form> -->
+            </form>
 
         </div>
 

@@ -1,4 +1,6 @@
-<?php include_once './db/db-inc.php'; ?>
+<?php 
+include_once './db/db-inc.php'; 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +51,7 @@
 
                 <div class="col-md-6 form-group">
                     <label>Email</label>
-                    <input name='email' class="form-control" type="text" placeholder="johndoe23@example.com">
+                    <input name='email' class="form-control" type="email" placeholder="johndoe23@example.com">
                 </div>
 
 
@@ -72,6 +74,9 @@
                     </select>
                 </div>
 
+                <div style = 'color: red;'  class='col-md-6 form-group'>
+                    <p name='message' id = 'warning'></p>
+                </div>
 
                 <div class="card-footer border-secondary bg-transparent login">
                     <button type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign
