@@ -46,23 +46,23 @@ include_once './db/db-inc.php';
             <form class='form-group' action="includes/register.inc.php" method="POST">
                 <div class="col-md-6 form-group">
                     <label>Fullname</label>
-                    <input name='fullname' class="form-control" type="text" placeholder="John Doe">
+                    <input require name='fullname' class="form-control" type="text" placeholder="John Doe">
                 </div>
 
                 <div class="col-md-6 form-group">
                     <label>Email</label>
-                    <input name='email' class="form-control" type="email" placeholder="johndoe23@example.com">
+                    <input require name='email' class="form-control" type="email" placeholder="johndoe23@example.com">
                 </div>
 
 
                 <div class="col-md-6 form-group">
                     <label>Username</label>
-                    <input name='username' class="form-control" type="text" placeholder="johndoe23">
+                    <input require name='username' class="form-control" type="text" placeholder="johndoe23">
                 </div>
 
                 <div class="col-md-6 form-group">
                     <label>Password</label>
-                    <input name='password' class="form-control" type="password" placeholder="Password">
+                    <input require name='password' class="form-control" type="password" placeholder="Password">
                 </div>
 
 

@@ -31,7 +31,7 @@
                     alert('Username or email aready used!');
                 </script>
             ";
-            header('Location: register.php');
+            header('Location: ../register.php');
         }
 
 ?>

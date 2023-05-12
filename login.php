@@ -27,6 +27,11 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        #warning {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -60,14 +65,9 @@
                 <input require name='password' class="form-control" type="password" placeholder="Password">
             </div>
 
-            <div class='col-md-6 form-group '>
-                <label>Role</label>
-                <select class='custom-select'>
-                    <option selected>Normal User</option>
-                    <option>Admin</option>
-                </select>
+            <div class="col-md-6 form-group">
+                <p id = "warning">Incorrect username or password</p>
             </div>
-
 
             <div class="card-footer border-secondary bg-transparent login">
                 <button type='submit' class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign in</button>
