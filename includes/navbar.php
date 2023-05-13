@@ -1,3 +1,9 @@
+<?php 
+
+    session_start();
+
+?>
+
 <div class="container-fluid">
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
@@ -42,8 +48,19 @@
                             <a href="contact.php" class="nav-item nav-link active">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
-                            <a href="login.php" class="nav-item nav-link">Login</a>
-                            <a href="register.php" class="nav-item nav-link">Register</a>
+                            <?php 
+                            
+                            if(isset($_SESSION["userid"])){
+                                echo "<a href='includes/logout.inc.php' class='nav-item nav-link'>Log out</a>";
+                                echo "<a href='profile.php' class='nav-item nav-link'>Profile</a>";   
+                            }
+                            else{
+                                echo " <a href='login.php' class='nav-item nav-link'>Login</a>";
+                                echo "<a href='register.php' class='nav-item nav-link'>Register</a>";
+                            }
+                            
+                            ?>
+                           
                         </div>
                     </div>
                 </nav>

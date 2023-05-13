@@ -43,7 +43,7 @@ include_once './db/db-inc.php';
 
         <div class='row px-xl-5 middle'>
 
-            <form class='form-group' action="includes/register.inc.php" method="POST">
+            <form class='form-group' action="./includes/register.inc.php" method="POST">
                 <div class="col-md-6 form-group">
                     <label for="fullname">Fullname</label>
                     <input id="fullname" name='fullname' class="form-control" type="text" placeholder="John Doe">
@@ -71,14 +71,18 @@ include_once './db/db-inc.php';
                     <input id = "pwdrepeat" type="password" name="pwdrepeat" class="form-control" type="password" placeholder="Repeat password">
                 </div>
 
+                <?php 
+                    include_once "includes/wrongData.php";
+                ?>
+
                 <div class="card-footer border-secondary bg-transparent login">
-                    <button type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign
+                    <button name = "submit" type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign
                         up</button>
                 </div>
 
 
             </form>
-
+            
         </div>
 
     </div>

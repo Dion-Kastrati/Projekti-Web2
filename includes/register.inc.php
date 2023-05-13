@@ -10,41 +10,38 @@
         $userRole = "Normal User";
         $adminRole = "Admin";
 
-        include_once '../db/db-inc.php';
-        include_once 'functions.ini.php';
+        require_once "../db/db-inc.php";
+        require_once "functions.inc.php";
 
         if(emptyInputSignup($fullname, $username, $email, $password, $pwdRepeat) !== false){
-            header("location: ../register.php?error=emptyinput");
-            exit();
+            header('location: ../register.php?error=emptyinput');
+        exit();
         }
 
         if(invalidUsername($username) !== false){
-            header("location: ../register.php?error=invalidusername");
-            exit();
+            header('location: ../register.php?error=invalidusername');
+        exit();
         }
 
         if(invalidEmail($email) !== false){
-            header("location: ../register.php?error=invalidemail");
-            exit();
+            header('location: ../register.php?error=invalidemail');
+        exit();
         }
 
         if(pwdMatch($password, $pwdRepeat) !== false){
-            header("location: ../register.php?passwordsdontmatch");
-            exit();
-        }
-        if(usernameExist($conn, $username) !== false){
-            header("location: ../register.php?error=usernametaken");
-            exit();
-        }
-        if(emailExist($conn, $email) !== false){
-            header("location: ../register.php?error=emailtaken");
-            exit();
+            header('location: ../register.php?error=pwdsdontmatch');
+        exit();
         }
 
-        createUser($conn, $username, $fullname, $email, $password, $user_role);
+        if(usernameExists($conn, $username, $email) !== false){
+            header('location: ../register.php?error=usernametaken');
+        exit();
+        }
 
+
+        createUser($conn, $username, $fullname, $email, $password, $userRole);
     }
     else{
-        header("location: ../index.php");
+        header('location: ../register.php');
         exit();
     }

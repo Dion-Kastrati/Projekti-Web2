@@ -52,7 +52,7 @@
 
             <form  class = 'form-group' action='includes/login.inc.php' method = 'POST'>
             <div class="col-md-6 form-group">
-                <label for = "username">Username</label>
+                <label for = "username">Username or Email</label>
                 <input id = "username" name='username' class="form-control" type="text" placeholder="johndoe23">
             </div>
 
@@ -61,8 +61,12 @@
                 <input id="pwd" name='password' class="form-control" type="password" placeholder="Password">
             </div>
 
+            <?php 
+                    include_once "includes/wrongData.php";
+            ?>
+
             <div class="card-footer border-secondary bg-transparent login">
-                <button type='submit' class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign in</button>
+                <button name = "submit" type='submit' class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign in</button>
             </div>
 
 

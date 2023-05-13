@@ -1,5 +1,6 @@
 <?php 
 
+    // Sign up functions
     function emptyInputSignup($fullname, $username, $email, $password, $pwdRepeat){
         $result;
         if(empty($fullname) || empty($username) || empty($email) || empty($password) || empty($pwdRepeat)){
@@ -8,11 +9,12 @@
         else{
             $result = false;
         }
+        return $result;
     }
 
     function invalidUsername($username){
         $result;
-        if(preg_match("/^[a-zA-Z0-9-_]*$/", $username)){ // Lejon qe username me pas veq shkronja t'mdha t vogla edhe numra dmth nuk ka simbole
+        if(!preg_match("/^[a-zA-Z0-9]*$/", $username)){
             $result = true;
         }
         else{
@@ -20,9 +22,10 @@
         }
         return $result;
     }
+
     function invalidEmail($email){
         $result;
-        if(filter_var($email, FILTER_VALIDATE_EMAIL)){ // Validon nese inputi i dhene te rubrika e email eshte acrually email
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
             $result = true;
         }
         else{
@@ -33,7 +36,7 @@
 
     function pwdMatch($password, $pwdRepeat){
         $result;
-        if($password !== $pwdRepeat){ // Validon nese inputi i dhene te rubrika e email eshte acrually email
+        if($password !== $pwdRepeat){
             $result = true;
         }
         else{
@@ -42,88 +45,116 @@
         return $result;
     }
 
-    function usernameExist($conn, $username){
-        $sql = "SELECT * FROM tblusers WHERE username = ?;";
-        $stmt = mysqli_stmt_init();
-        if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("location: ../register.php?error=stmtfailed");
-            exit();
-        }
-
-        mysqli_stmt_bind_param($stmt, "s", $username); // Parametri i pare tregon cilit prepared statement me ja qu paramterin e 3 dhe 4, 
-                                                       //parametri i 2 kallxon tipin e parametrit te 3 dhe 4
-        mysqli_stmt_execute($stmt);
-
-        $resultData = mysqli_stmt_get_result($stmt) // marrim rezultatet prej prepared statement-it
-
-        if($row = mysqli_fetch_assoc($resultData)){
-            return $row;
-        }
-        else{
-            $row = false;
-            return $row;
-        }
-
-        mysqli_stmt_close($stmt); // $stmt->close();
-    }  
-    
-    function emailExist($conn,  $email){
-        $sql = "SELECT * FROM tblusers WHERE email = ?;";
-        $stmt = mysqli_stmt_init();
-        if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("location: ../register.php?error=stmtfailed");
-            exit();
-        }
-
-        mysqli_stmt_bind_param($stmt, "s", $email); // Parametri i pare tregon cilit prepared statement me ja qu paramterin e 3 dhe 4, 
-                                                       //parametri i 2 kallxon tipin e parametrit te 3 dhe 4
-        mysqli_stmt_execute($stmt);
-
-        $resultData = mysqli_stmt_get_result($stmt) // marrim rezultatet prej prepared statement-it
-
-        if($row = mysqli_fetch_assoc($resultData)){
-            return $row;
-        }
-        else{
-            $row = false;
-            return $row;
-        }
-
-        mysqli_stmt_close($stmt); // $stmt->close();
-    }  
-
-    function createUser($conn, $username, $fullname, $email, $password, $user_role){
-        $sql = "INSERT INTO tblusers(username, fullname, email, hashedPassword, user_role) VALUES (?, ?, ?, ?, ?); ";
+    function usernameExists($conn, $username, $email){
+        $sql = "SELECT * FROM tblusers WHERE username = ? OR email = ?";
         $stmt = mysqli_stmt_init($conn);
+
         if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("location: ../register.php?error=stmtfailed");
+            header('location: ../register.php?error=stmtfailed');
             exit();
         }
+        mysqli_stmt_bind_param($stmt, "ss", $username, $email);
+        mysqli_stmt_execute($stmt);
+
+        $resultData = mysqli_stmt_get_result($stmt);
+
+        if($row = mysqli_fetch_assoc($resultData)){
+            return $row;
+        }
+        else{
+            $result = false;
+            return $result;
+        }
+
+        mysqli_stmt_close($stmt);
+    }
+
+    function wrongUsername($conn, $username, $password){
+        $sql = "SELECT * FROM tblusers WHERE username = ? AND hashedPassword = ?";
+        $stmt = mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            header('location: ../register.php?error=stmtfailed');
+            exit();
+        }
+
+
+
+        mysqli_stmt_bind_param($stmt, "ss", $username, $password);
+        mysqli_stmt_execute($stmt);
+
+        $resultData = mysqli_stmt_get_result($stmt);
+
+        if($row = mysqli_fetch_assoc($resultData)){
+            return $row;
+        }
+        else{
+            $result = false;
+            return $result;
+        }
+
+        mysqli_stmt_close($stmt);
+    }
+
+    function  createUser($conn, $username, $fullname, $email, $password, $userRole){
+        $sql = "INSERT INTO tblusers(username, fullname, email, hashedPassword, user_role) VALUES(?, ?, ?, ?, ?);";
+        $stmt = mysqli_stmt_init($conn);
+       
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            header('location: ../register.php?error=stmtfailed');
+            exit();
+        }
+
+        $normalUser = "Normal user";
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        mysqli_stmt_bind_param($stmt, "sssss", $username, $fullname, $email, $hashedPassword, $user_role ); // Parametri i pare tregon cilit prepared statement me ja qu paramterin e 3 dhe 4, 
-                                                       //parametri i 2 kallxon tipin e parametrit te 3 dhe 4
+        mysqli_stmt_bind_param($stmt, "sssss", $username, $fullname, $email, $hashedPassword, $normalUser);
         mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt); // $stmt->close();
-        header("location: ../register.php?error=none");
+        mysqli_stmt_close($stmt);
+
+        header('location: ../register.php?error=none');
         exit();
     }
 
-    // function createAdmin($conn, $username, $fullname, $email, $password, $user_role){
-    //     $sql = "INSERT INTO tblusers(username, fullname, email, hashedPassword, user_role ) VALUES(?,?,?,?,?); ";
-    //     $stmt = mysqli_stmt_init();
-    //     if(!mysqli_stmt_prepare($stmt, $sql)){
-    //         header("location: ../register.php?error=stmtfailed");
-    //         exit();
-    //     }
+    
 
-    //     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    //     mysqli_stmt_bind_param($stmt, "sssss", $username, $fullname, $email, $hashedPassword, "Admin" ); // Parametri i pare tregon cilit prepared statement me ja qu paramterin e 3 dhe 4, 
-    //                                                    //parametri i 2 kallxon tipin e parametrit te 3 dhe 4
-    //     mysqli_stmt_execute($stmt);
-    //     mysqli_stmt_close($stmt); // $stmt->close();
-    //     header("location: ../register.php?error=adminnone");
-    //     exit();
-    // }
+    //Login functions    
+    function emptyInputLogin($username, $password){
+        $result;
+        if(empty($username) || empty($password)){
+            $result = true;
+        }
+        else{
+            $result = false;
+        }
+        return $result;
+    }
+
+    function loginUser($conn, $username, $password){
+        $usernameExists = usernameExists($conn, $username, $username); // Logjika OR ne funksionin me larte me emrin e njejt ne lejon qe njera prej 
+                                                                       // dy kushteve te plotesohet qe useri ose te vendos emailin ose usernamein
+        if($usernameExists === false){
+            header("Location ../login.php?error=worngdata");
+            exit();
+        }
+
+        $hashedPassword = $usernameExists["hashedPassword"]; // Pasi qe usernameExist eshte nje funksion qe merr te dhenat ne metoden asocc 
+                                                            // ne mund te marrim emrin e nje kolone ne db dhe me nxierr te dhena prej saj
+        $plainPassword = password_verify($password, $hashedPassword);
+
+        if($plainPassword === false){
+            header("Location: ../login.php?error=wrongdata");
+            exit();
+        }
+
+        else if($plainPassword === true){
+            session_start();
+            $_SESSION["fullname"] = $usernameExists["fullname"];
+            $_SESSION["userid"] = $usernameExists["user_id"];
+
+            header("Location: ../index.php?");
+            exit();
+        }
+    }

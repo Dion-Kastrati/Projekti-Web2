@@ -1,11 +1,11 @@
 .middle{
 
     display: block !important;
-    width: 50%;
+    width: 70%;
     position: relative;
     left: 35%;
 }
 
 .middle > .form-group > .login{
-    width: 50%;
+    width: 70%;
 }
