@@ -41,7 +41,7 @@ include_once './db/db-inc.php';
 
     <div class='container-fluid pt-5'>
 
-        <div  style='width: 60%' class='row px-xl-5 middle'>
+        <div  style='left: 35%; width: 60%' class='row px-xl-5 middle'>
 
             <form class='form-group' action="./includes/register.inc.php" method="POST">
                 <div class="col-md-6 form-group">

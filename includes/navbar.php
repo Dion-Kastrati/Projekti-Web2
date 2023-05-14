@@ -1,9 +1,3 @@
-<?php 
-
-    session_start();
-
-?>
-
 <div class="container-fluid">
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
@@ -45,7 +39,19 @@
                                     <a href="checkout.php" class="dropdown-item">Checkout</a>
                                 </div>
                             </div>
-                            <a href="contact.php" class="nav-item nav-link active">Contact</a>
+                            <a href="contact.php" class="nav-item nav-link">Contact</a>
+                            <?php 
+                            
+                            if(isset($_SESSION["userid"])){
+                                if($_SESSION["user_role"] == "Admin"){
+                                echo "<a href='admin/adminDashboard.php' class='nav-item nav-link'>Dashboard</a>";
+                                }
+                                else if ($_SESSION["user_role"] == "Normal user"){
+                                echo "<p style='position:relative; top:20px; left:10px'> Dashboard </p>"; 
+                                }
+                            }
+                            
+                            ?>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                             <?php 

@@ -153,8 +153,17 @@
             session_start();
             $_SESSION["fullname"] = $usernameExists["fullname"];
             $_SESSION["userid"] = $usernameExists["user_id"];
-
-            header("Location: ../index.php?");
-            exit();
+            $_SESSION["username"] = $usernameExists["username"];
+            $_SESSION["profilePic"] = $usernameExists["profile_pic"];
+            $_SESSION["email"] = $usernameExists["email"];
+            $_SESSION["user_role"] = $usernameExists["user_role"];
+            if($usernameExists["user_role"] == "Normal user"){
+                header("Location: ../index.php?");
+                exit();
+            }
+            else if($usernameExists["user_role"] == "Admin"){
+                header("Location: ../admin/adminDashboard.php");
+                exit();
+            }
         }
     }

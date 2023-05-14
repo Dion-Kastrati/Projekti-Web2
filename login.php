@@ -48,7 +48,7 @@
 
     <div class='container-fluid pt-5'>
 
-        <div style='left: 32%;' class='row px-xl-5 middle'>
+        <div style='left: 35%; width: 60%' class='row px-xl-5 middle'>
 
             <form  class = 'form-group' action='includes/login.inc.php' method = 'POST'>
             <div class="col-md-6 form-group">
