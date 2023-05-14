@@ -3,9 +3,4 @@
     display: block !important;
     width: 50%;
     position: relative;
-    left: 35%;
-}
-
-.middle > .form-group > .login{
-    width: 50%;
 }

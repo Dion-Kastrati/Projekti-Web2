@@ -48,7 +48,7 @@
 
     <div class='container-fluid pt-5'>
 
-        <div class='row px-xl-5 middle'>
+        <div style='left: 32%;' class='row px-xl-5 middle'>
 
             <form  class = 'form-group' action='includes/login.inc.php' method = 'POST'>
             <div class="col-md-6 form-group">
@@ -65,7 +65,7 @@
                     include_once "includes/wrongData.php";
             ?>
 
-            <div class="card-footer border-secondary bg-transparent login">
+            <div style='width: 50%' class="card-footer border-secondary bg-transparent login">
                 <button name = "submit" type='submit' class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign in</button>
             </div>
 
