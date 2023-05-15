@@ -26,7 +26,7 @@
     <link href="css/style.css" rel="stylesheet">
 
     <!-- Costumized design of the page -->
-    <link href="./css/profile.css" rel="stylesheet">
+    <link href="./css/changeData.css" rel="stylesheet">
 </head>
 <body>
     <!-- Top bar start -->
@@ -38,34 +38,50 @@
     <!-- Nav bar end -->
 
     <div class = "profile-card">
-        <?php 
+        <?php
             if(isset($_SESSION["userid"])){
-                echo "
+               echo "
                 <img class='img' src=" .$_SESSION['profilePic']." alt=''>
                 <div class='infos'>
                         <div class='infos-data'>
-                            <h3 class='category'>Username: </h3>
-                            <h3 class='data'>".$_SESSION['username']."</h3>
+                            <div class='category'>
+                                <h3 >Username: </h3>
+                            </div>
+                           
+                            <div class='edit-data'>
+                                <h3 class='data'>".$_SESSION['username']."</h3>
+                                <i class='fa fa-solid fa-wrench edit-tool'></i>
+                            </div>
                         </div>
                         <div class='infos-data'>
-                            <h3 class='category'>Fullname: </h3>
-                            <h3 class='data'>".$_SESSION['fullname']."</h3>
+                        <div class='category'>
+                                <h3 >Fullname: </h3>
+                            </div>
+                            <div class='edit-data'>
+                                <h3 class='data'>"  .$_SESSION['fullname']."</h3>
+                                <i class='fa fa-solid fa-wrench edit-tool'></i>
+                            </div>
                         </div>
                         <div class='infos-data'>
-                            <h3 class='category'>Email: </h3>
-                            <h3 class='data'>".$_SESSION['email']."</h3>
+                        <div class='category'>
+                                <h3 >Email: </h3>
+                            </div>
+                            <div class='edit-data'>
+                                <h3 class='data'>".$_SESSION['email']."</h3>
+                                <i class='fa fa-solid fa-wrench edit-tool'></i>
+                            </div>
                         </div>
                         <div class='infos-data'>
-                            <h3 class='category'>Role: </h3>
+                        <div class='category'>
+                                <h3 >Role: </h3>
+                            </div>
+                            <div class='edit-data'>
                             <h3 class='data'>".$_SESSION['user_role']."</h3>
+                            <i style='color:white !important' class='fa fa-solid fa-wrench edit-tool'></i>
+                        </div>           
                         </div>";
                     }
                     ?>
-                        <div class='button'>
-                            <a href="changeData.php" class='btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3 edit'>Edit</a>
-                        </div>
-                </div>
-         
     </div>
 </body>
 </html>
