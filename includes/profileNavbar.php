@@ -25,11 +25,11 @@
                             
                             if(isset($_SESSION["userid"])){
                                 echo "<a href='includes/logout.inc.php' class='nav-item nav-link'>Log out</a>";
-                                echo "<a href='profile.php' class='nav-item nav-link'>Profile</a>";   
+                                echo "<a href='profile.php?edit=false' class='nav-item nav-link'>Profile</a>";   
                             }
                             else{
                                 echo " <a href='login.php' class='nav-item nav-link'>Login</a>";
-                                echo "<a href='register.php' class='nav-item nav-link'>Register</a>";
+                                echo "<a href='register.php' class='nav-item nav-link'>Sign up</a>";
                             }
                             
                             ?>

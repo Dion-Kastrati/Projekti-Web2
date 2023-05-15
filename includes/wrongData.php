@@ -27,7 +27,11 @@
         echo "<p style = 'color: green;  position:relative; left: 18% '> You signed up! </p>";
     }
     else if($_GET["error"] == "wrongdata"){
-        echo "<p style = 'color: red; position:relative; left: 8% '> Incorrect username or password! </p>";
+        echo "<p style = 'color: red; position:relative; left: 9% '> Incorrect username or password! </p>";
     }
+    else if($_GET["error"] == "nodata"){
+        echo "<p style = 'color: red; position:relative; left: 9% '> This user do not exist, Sign up? </p>";
+    }
+
 
     

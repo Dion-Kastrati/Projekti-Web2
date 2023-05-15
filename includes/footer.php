@@ -7,7 +7,7 @@
                 </a>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem cumque vero itaque et, deserunt qui explicabo quaerat repellendus iusto ad quis, molestiae ducimus aspernatur omnis odit pariatur ratione? Atque, repudiandae.</p>
                 <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>elib-info@gamil.com</p>
+                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>elib-info@gmail.com</p>
                 <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+383 49 236 654</p>
             </div>
             <div class="col-lg-8 col-md-12">

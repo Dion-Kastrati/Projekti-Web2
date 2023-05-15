@@ -1,5 +1,5 @@
 
-.profile-card{
+form > .profile-card{
     display: flex;
     width:70vw;
     border: 3px #D19C97 solid;
@@ -9,17 +9,6 @@
     position: relative;
     left: 15%;
 }
-
-.img{
-    display: block;
-    width: 11vw;
-    height: 22vh;
-    position: relative;
-    left: 10%;
-    top: 5%;
-    border-radius: 50% !important; 
-}
-
 .profile-card > .infos,
 .profile-card > .infos > .infos-data{
     display: block;
@@ -60,4 +49,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
 }

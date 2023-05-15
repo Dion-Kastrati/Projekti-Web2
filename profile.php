@@ -1,3 +1,6 @@
+<?php 
+    header("location profile.php?edit=false");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,35 +40,85 @@
     <?php include "includes/profileNavbar.php"; ?>
     <!-- Nav bar end -->
 
-    <div class = "profile-card">
-        <?php 
+    <?php 
+            
             if(isset($_SESSION["userid"])){
-                echo "
-                <img class='img' src=" .$_SESSION['profilePic']." alt=''>
-                <div class='infos'>
-                        <div class='infos-data'>
-                            <h3 class='category'>Username: </h3>
-                            <h3 class='data'>".$_SESSION['username']."</h3>
+                if($_GET['edit'] == 'false'){
+                    echo " <form method='POST' action='includes/profile.inc.php' class = 'profile-card'>";
+                }
+                else if ($_GET['edit'] == 'true'){
+                   include 'includes/trueform.inc.php';
+                }
+                if($_GET['edit'] == 'true'){
+                    echo"
+                    <div> 
+                        <img style='postion:relative; left:40%; top:-2%; z-index:1;' class='img' src=" .$_SESSION['profilePic']." alt=''>
+                        <button type='submit' name='edit-profile-pic' style='display:inline-block; width:11vw; margin-left:40%; z-index:2'> Edit profile pic </button>
+                    </div>
+                    <div class='infos'>
+                    <div class='infos-data'>";
+                }
+                else{
+                echo"
+                    <img class='img' src=" .$_SESSION['profilePic']." alt=''>
+                    <div class='infos'>
+                    <div class='infos-data'>";
+                }
+                            if($_GET['edit'] == 'true'){
+                                echo "<input style='width:60%; margin-top:0vh; position:relative; left:20%'  class='form-control' placeholder='Username' type='text' value=".$_SESSION['username'].">";
+                            }
+                            else{
+                            echo"  <h3 class='category'>Username: </h3>
+                                    <h3 class='data'>".$_SESSION['username']."</h3>";
+                            }
+                            echo "
                         </div>
-                        <div class='infos-data'>
-                            <h3 class='category'>Fullname: </h3>
-                            <h3 class='data'>".$_SESSION['fullname']."</h3>
+                        <div class='infos-data'>";
+                            if($_GET['edit'] == 'true'){
+                                echo "<input style='width:60%; margin-top:0.8vh; position:relative; left:20%' class='form-control' placeholder='Fullname' type='text' value=".$_SESSION['fullname'].">";
+                            }
+                            else{
+                            echo "<h3 class='category'>Fullname: </h3>
+                                <h3 class='data'>".$_SESSION['fullname']."</h3>";
+                        }
+                            echo"
                         </div>
-                        <div class='infos-data'>
-                            <h3 class='category'>Email: </h3>
-                            <h3 class='data'>".$_SESSION['email']."</h3>
+                        <div class='infos-data'>";
+                            if($_GET['edit'] == 'true'){
+                                echo "<input style='width:60%; margin-top:0.8vh; position:relative; left:20%'  class='form-control' placeholder='Email' type='text' value=".$_SESSION['email'].">";
+                            }
+                            else{
+                            echo "<h3 class='category'>Email: </h3>
+                            <h3 class='data'>".$_SESSION['email']."</h3>";
+                        }
+                        echo"
                         </div>
-                        <div class='infos-data'>
-                            <h3 class='category'>Role: </h3>
-                            <h3 class='data'>".$_SESSION['user_role']."</h3>
+                        <div class='infos-data'>";
+                            if($_GET['edit'] == 'true'){
+                                echo "<input style='width:60%; margin-top:0.8vh; position:relative; left:20%'  class='form-control' placeholder='Password' type='password' value=".$_SESSION['password'].">";
+                            }
+                            else{
+                            echo"<h3 class='category'>Password: </h3>
+                            <h3 class='data'>*******</h3>";
+                        }
+                        echo"
+                        </div>";
+                        if($_GET['edit'] === 'true'){
+                            echo "<div class='infos-data'>
+                                 <input style='width:60%; margin-top:0.8vh; position:relative; left:20%'  class='form-control' placeholder='Repeat password' type='password' value=".$_SESSION['password'].">";
+                            }
+                    }
+                    if($_GET['edit'] === 'false'){
+                     echo"<div class='button'>
+                        <button name = 'edit' type='submit' class='btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3 edit'>Edit</button>
                         </div>";
                     }
+                    else if ($_GET['edit'] == 'true')
+                        echo"<div class='button'>
+                        <button style='width:60%; position:relative; left:20%' name='save' type='submit' class='btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3 save'>Save</button>
+                        </div>";
                     ?>
-                        <div class='button'>
-                            <a href="changeData.php" class='btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3 edit'>Edit</a>
-                        </div>
-                </div>
-         
-    </div>
+            </div>
+    </form>
 </body>
 </html>

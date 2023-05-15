@@ -69,6 +69,30 @@
         mysqli_stmt_close($stmt);
     }
 
+    function usernameExistsLogin($conn, $username){
+        $sql = "SELECT * FROM tblusers WHERE username = ?";
+        $stmt = mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            header('location: ../register.php?error=stmtfailed');
+            exit();
+        }
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_execute($stmt);
+
+        $resultData = mysqli_stmt_get_result($stmt);
+
+        if($row = mysqli_fetch_assoc($resultData)){
+            return false;
+        }
+        else{
+            $result = true;
+            return $result;
+        }
+
+        mysqli_stmt_close($stmt);
+    }
+
     function wrongUsername($conn, $username, $password){
         $sql = "SELECT * FROM tblusers WHERE username = ? AND hashedPassword = ?";
         $stmt = mysqli_stmt_init($conn);
@@ -77,8 +101,6 @@
             header('location: ../register.php?error=stmtfailed');
             exit();
         }
-
-
 
         mysqli_stmt_bind_param($stmt, "ss", $username, $password);
         mysqli_stmt_execute($stmt);
@@ -157,6 +179,8 @@
             $_SESSION["profilePic"] = $usernameExists["profile_pic"];
             $_SESSION["email"] = $usernameExists["email"];
             $_SESSION["user_role"] = $usernameExists["user_role"];
+            $_SESSION["password"] = $password;
+
             if($usernameExists["user_role"] == "Normal user"){
                 header("Location: ../index.php?");
                 exit();

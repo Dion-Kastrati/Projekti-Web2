@@ -47,7 +47,7 @@
                                 echo "<a href='admin/adminDashboard.php' class='nav-item nav-link'>Dashboard</a>";
                                 }
                                 else if ($_SESSION["user_role"] == "Normal user"){
-                                echo "<p style='position:relative; top:20px; left:10px'> Dashboard </p>"; 
+                                echo "<p style='position:relative; top:20px; left:10px; color:rgb(166, 165, 165)'> Dashboard </p>"; 
                                 }
                             }
                             
@@ -58,11 +58,11 @@
                             
                             if(isset($_SESSION["userid"])){
                                 echo "<a href='includes/logout.inc.php' class='nav-item nav-link'>Log out</a>";
-                                echo "<a href='profile.php' class='nav-item nav-link'>Profile</a>";   
+                                echo "<a href='profile.php?edit=false' class='nav-item nav-link'>Profile</a>";   
                             }
                             else{
                                 echo " <a href='login.php' class='nav-item nav-link'>Login</a>";
-                                echo "<a href='register.php' class='nav-item nav-link'>Register</a>";
+                                echo "<a href='register.php' class='nav-item nav-link'>Sign up</a>";
                             }
                             
                             ?>

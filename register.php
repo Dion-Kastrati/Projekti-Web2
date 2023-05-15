@@ -33,6 +33,12 @@ include_once './db/db-inc.php';
 
 <body>
 
+    <!-- Topbar Start -->
+    <?php
+    include 'includes/topbar.php';
+    ?>
+    <!-- Topbar End -->
+
     <!-- Navbar Start -->
     <?php
     include 'includes/navbar.php';
