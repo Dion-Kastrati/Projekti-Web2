@@ -121,32 +121,32 @@
             <h2 class="section-title px-5"><span class="px-2">Contact For Any Questions</span></h2>
         </div>
         <div class="col-lg-7 mb-5">
-                <div class="question-form">
+                <div class="contact-form">
                     <div id="success"></div>
-                    <form name="sentQuestion" id="questionForm" novalidate="novalidate">
+                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
                         <div class="control-group">
                             <input type="text" class="form-control" id="name" placeholder="Your Name"
-                                required="required" data-validation-required-question="Please enter your name" />
+                                required="required" data-validation-required-message="Please enter your name" />
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
                             <input type="email" class="form-control" id="email" placeholder="Your Email"
-                                required="required" data-validation-required-question="Please enter your email" />
+                                required="required" data-validation-required-message="Please enter your email" />
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
                             <input type="text" class="form-control" id="subject" placeholder="Subject"
-                                required="required" data-validation-required-question="Please enter a subject" />
+                                required="required" data-validation-required-message="Please enter a subject" />
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <textarea class="form-control" rows="6" id="question" placeholder="Question"
+                            <textarea class="form-control" rows="6" id="message" placeholder="Question"
                                 required="required"
-                                data-validation-required-question="Please enter your question"></textarea>
+                                data-validation-required-message="Please enter your Question"></textarea>
                             <p class="help-block text-danger"></p>
                         </div>
                         <div>
-                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendQuestionButton">Send
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Submit
                                 Question</button>
                         </div>
                     </form>
