@@ -4,29 +4,16 @@
 <head>
   <meta charset="utf-8">
   <title>FAQ</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
   <style type="text/css">
     body {
-      background: #eee;
-      /* padding-top: 20px; */
+      background: white;
       font-family: monospace;
-    }
-
-    .header {
-      border-radius: 20px 20px 0px 0px;
-      padding: 10px 0px;
-      background: #D19C97;
-      color: #fff;
-      width: 100%;
-      display: flex;
-      align-content: center;
-      justify-content: center;
     }
 
     .faq-item {
       margin-bottom: 40px;
-      margin-top: 40px;
+      margin-top: 30px;
     }
 
     .faq-body {
@@ -35,18 +22,19 @@
     }
 
     .faq-wrapper {
-      width: 150%;
+      width: 100%;
       margin: 0 auto;
     }
 
     .faq-inner {
-      padding: 30px;
+      padding: 5px;
       background: white;
+      font-size: 15px;
     }
 
     .faq-plus {
       float: right;
-      font-size: 1.4em;
+      font-size: 1.2em;
       line-height: 1em;
       cursor: pointer;
     }
@@ -54,10 +42,34 @@
     hr {
       background-color: #9b9b9b;
     }
+
+    
+    .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.faq-wrapper {
+  flex: 1;
+  width: 70%; /* Adjust the width as needed */
+  margin: 0 auto;
+}
+
+.col-lg-7 {
+  flex: 0 0 30%; /* Adjust the width as needed */
+  max-width: auto;
+  margin: 0 auto;
+  text-align: center;
+}
+
   </style>
 
-  <meta charset="utf-8">
-  <title>eLibrary</title>
+
+
+  
+
+  
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="Free HTML Templates" name="keywords">
   <meta content="Free HTML Templates" name="description">
@@ -109,8 +121,43 @@
   <!-- Page Header End -->
 
 
-  <body>
+  
     <div class="container">
+    <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">Contact For Any Questions</span></h2>
+        </div>
+        <div class="col-lg-7 mb-5">
+                <div class="question-form">
+                    <div id="success"></div>
+                    <form name="sentQuestion" id="questionForm" novalidate="novalidate">
+                        <div class="control-group">
+                            <input type="text" class="form-control" id="name" placeholder="Your Name"
+                                required="required" data-validation-required-question="Please enter your name" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="email" class="form-control" id="email" placeholder="Your Email"
+                                required="required" data-validation-required-question="Please enter your email" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="text" class="form-control" id="subject" placeholder="Subject"
+                                required="required" data-validation-required-question="Please enter a subject" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <textarea class="form-control" rows="6" id="question" placeholder="Question"
+                                required="required"
+                                data-validation-required-question="Please enter your question"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendQuestionButton">Send
+                                Question</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
       <div class="row">
         <div class="faq-wrapper">
           <div class="faq-inner">
@@ -162,26 +209,28 @@
               </div>
             </div>
             <hr>
-            <div class="faq-item">
-              <h3>
-                What is an FAQ page ?
-                <span class="faq-plus">&plus;</span>
-              </h3>
-              <div class="faq-body">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book.
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
     <script type="text/javascript">
-      $(".faq-plus").on('click', function () {
-        $(this).parent().parent().find('.faq-body').slideToggle();
-      });
-    </script>
+    $(".faq-plus").on('click', function () {
+      var faqItem = $(this).closest('.faq-item');
+      var faqBody = faqItem.find('.faq-body');
+      var otherFaqItems = $(".faq-item").not(faqItem);
+      var otherFaqBodies = $(".faq-body").not(faqBody);
+  if (faqBody.is(':visible')) {
+    faqBody.slideUp();
+    $(this).removeClass('active');
+  } else {
+    otherFaqItems.removeClass('active');
+    otherFaqBodies.slideUp();
+    faqBody.slideDown();
+    $(this).addClass('active');
+  }
+});
+  </script>
+    
     <!-- Footer Start -->
     <?php
     include 'includes/footer.php';
