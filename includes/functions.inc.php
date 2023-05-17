@@ -191,3 +191,45 @@
             }
         }
     }
+
+    function editUserData($conn, $username, $fullname, $email, $password){
+        $usernameExists = usernameExists($conn, $username, $username);
+        $_SESSION['user_id'] = $usernameExists["user_id"];
+        if(isset($_POST["save"])){
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $query = "UPDATE tblusers
+                      SET username = '$username', fullname = '$fullname', email = '$email', hashedPassword = '$hashedPassword'
+                      WHERE user_id = ".$_SESSION['user_id']."";
+            $resutls = mysqli_query($conn, $query);
+
+            if($results){
+                echo "Data updated successfully";
+            }
+            else {
+                echo "Data not updated";
+            }
+            mysqli_close($conn);
+            
+
+            header("location: ../profile.php?edit=false");
+            exit();
+    }
+}
+
+    //Edit data functions
+
+
+    function emptyInputEdit($fullname, $username, $email, $password, $pwdRepeat){
+        $result;
+        if(empty($fullname) || empty($username) || empty($email) || empty($password) || empty($pwdRepeat)){
+            $result = true;
+        }
+        else{
+            $result = false;
+        }
+        return $result;
+    }
+
+    function changeProfilePic($conn, $profilePic){
+        
+    }
