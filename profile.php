@@ -77,26 +77,25 @@
                             echo "
                         </div>
                         <div class='infos-data'>";
-                        if($_GET['edit'] == 'false'){
-                            echo "<h3 class='category'>Fullname: </h3>
-                                <h3 class='data'>".$_SESSION['fullname']."</h3>";
-                        }
-                        
-                        else if(include 'includes/editCases.inc.php'){
-                                echo "<input name='fullname' style='width:60%; margin-top:0.8vh; position:relative; left:20%' class='form-control' placeholder='Fullname' type='text' value=".$_SESSION['fullname'].">";
+                            if($_GET['edit'] == 'false'){
+                                echo "<h3 class='category'>Fullname: </h3>
+                                    <h3 class='data'>".$_SESSION['fullname']."</h3>";
                             }
-                            else 
-                            echo"
-                            </div>
+                            
+                            else if(include 'includes/editCases.inc.php'){
+                                    echo "<input name='fullname' style='width:60%; margin-top:0.8vh; position:relative; left:20%' class='form-control' placeholder='Fullname' type='text' value=".$_SESSION['fullname'].">";
+                                }
+                        echo"
+                        </div>
                         <div class='infos-data'>";
-                        if($_GET['edit'] == 'false'){
-                            echo "  <h3 class='category'>Email: </h3>
-                            <h3 class='data'>".$_SESSION['email']."</h3>";
-                        }
-                        else if(include 'includes/editCases.inc.php'){
-                                echo "<input name='email' style='width:60%; margin-top:0.8vh; position:relative; left:20%'  class='form-control' placeholder='Email' type='text' value=".$_SESSION['email'].">";
+                            if($_GET['edit'] == 'false'){
+                                echo "  <h3 class='category'>Email: </h3>
+                                <h3 class='data'>".$_SESSION['email']."</h3>";
                             }
-                             
+                            else if(include 'includes/editCases.inc.php'){
+                                    echo "<input name='email' style='width:60%; margin-top:0.8vh; position:relative; left:20%'  class='form-control' placeholder='Email' type='text' value=".$_SESSION['email'].">";
+                                }
+                                
                         echo"
                         </div>
                         <div class='infos-data'>";

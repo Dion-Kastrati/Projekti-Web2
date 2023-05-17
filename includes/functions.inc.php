@@ -194,12 +194,12 @@
 
     function editUserData($conn, $username, $fullname, $email, $password){
         $usernameExists = usernameExists($conn, $username, $username);
-        $_SESSION['user_id'] = $usernameExists["user_id"];
+        $_SESSION['userid'] = $usernameExists["user_id"];
         if(isset($_POST["save"])){
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $query = "UPDATE tblusers
                       SET username = '$username', fullname = '$fullname', email = '$email', hashedPassword = '$hashedPassword'
-                      WHERE user_id = ".$_SESSION['user_id']."";
+                      WHERE user_id = ".$_SESSION['userid']."";
             $resutls = mysqli_query($conn, $query);
 
             if($results){
@@ -233,3 +233,139 @@
     function changeProfilePic($conn, $profilePic){
         
     }
+
+    function addFavorites($conn, $userId, $username, $bookId){
+        if (isset($_POST['favbtn'])) {
+            
+            // Insert the favorite into the tblfavorites table
+            // Prepare the statement
+            $stmt = mysqli_prepare($conn, "INSERT INTO tblfavorites (user_id, username, book_id) VALUES (?, ?, ?)");
+            $stmt1 = mysqli_prepare($conn, "SELECT user_id, book_id FROM tblfavorites WHERE book_id = ?");
+            mysqli_stmt_bind_param($stmt1, "i", $bookId);
+            mysqli_stmt_execute($stmt1);
+
+            $results = mysqli_stmt_get_result($stmt1);
+
+            mysqli_stmt_close($stmt1);
+
+            $row = mysqli_num_rows($results);
+            
+            if($row > 0){
+                echo "aksdljaslkda";
+            }
+            else{
+            if ($stmt) {
+                // Bind the values to the statement
+                if (mysqli_stmt_bind_param($stmt, "isi", $userId, $username, $bookId)) {
+                    // Execute the statement
+                    if (!mysqli_stmt_execute($stmt)) {
+                        // Success
+                        echo "Error executing statement: " . mysqli_stmt_error($stmt);
+                        
+                    } else {
+                        // Error during execution
+                        echo "Statement executed successfully.";
+                    }
+                } else {
+                    // Error binding parameters
+                    echo "Error binding parameters: " . mysqli_stmt_error($stmt);
+                }
+
+                mysqli_stmt_close($stmt);
+            } else {
+                // Error preparing statement
+                echo "Error preparing statement: " . mysqli_error($conn);
+            }
+        }
+
+
+            header("location: ../shop.php");
+            exit();
+        }
+    }
+    
+    function justArrivedAddFavorites($conn, $userId, $username, $bookId){
+        if (isset($_POST['favbtn'])) {
+            
+            // Insert the favorite into the tblfavorites table
+            // Prepare the statement
+            $stmt = mysqli_prepare($conn, "INSERT INTO tblfavorites (user_id, username, book_id) VALUES (?, ?, ?)");
+            $stmt1 = mysqli_prepare($conn, "SELECT user_id, book_id FROM tblfavorites WHERE book_id = ?");
+            mysqli_stmt_bind_param($stmt1, "i", $bookId);
+            mysqli_stmt_execute($stmt1);
+
+            $results = mysqli_stmt_get_result($stmt1);
+
+            mysqli_stmt_close($stmt1);
+
+            $row = mysqli_num_rows($results);
+            
+            if($row > 0){
+                echo "aksdljaslkda";
+            }
+            else{
+            if ($stmt) {
+                // Bind the values to the statement
+                if (mysqli_stmt_bind_param($stmt, "isi", $userId, $username, $bookId)) {
+                    // Execute the statement
+                    if (!mysqli_stmt_execute($stmt)) {
+                        // Success
+                        echo "Error executing statement: " . mysqli_stmt_error($stmt);
+                        
+                    } else {
+                        // Error during execution
+                        echo "Statement executed successfully.";
+                    }
+                } else {
+                    // Error binding parameters
+                    echo "Error binding parameters: " . mysqli_stmt_error($stmt);
+                }
+
+                mysqli_stmt_close($stmt);
+            } else {
+                // Error preparing statement
+                echo "Error preparing statement: " . mysqli_error($conn);
+            }
+        }
+
+
+
+            header("location: ../index.php");
+            exit();
+        }
+    }
+    
+
+
+        function addToCart($conn, $userId, $bookId){
+            
+            if (isset($_POST['cartbtn'])) {
+                // Prepare the statement
+                try {
+                    // Insert into tblcart
+                    $stmt = $conn->prepare("INSERT INTO tblcart (user_id, book_id) VALUES (?, ?)");
+                    $stmt->bind_param("ii", $userId, $bookId);
+                    $stmt->execute();
+                    $stmt->close();
+            
+                    // Update tblbooks quantity
+                    $updateStmt = $conn->prepare("UPDATE tblbooks SET quantity = quantity - 1 WHERE book_id = ?");
+                    $updateStmt->bind_param("i", $bookId);
+                    $updateStmt->execute();
+                    $updateStmt->close();
+            
+                    // Commit the transaction
+                    $conn->commit();
+            
+                    echo "Added to cart successfully.";
+                } catch (Exception $e) {
+                    // Rollback the transaction on error
+                    $conn->rollback();
+            
+                    echo "Error adding to cart: " . $e->getMessage();
+                }
+            
+                // Close the database connection
+                $conn->close();
+            }   
+        }
