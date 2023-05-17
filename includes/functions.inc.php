@@ -236,104 +236,85 @@
 
     function addFavorites($conn, $userId, $username, $bookId){
         if (isset($_POST['favbtn'])) {
-            
             // Insert the favorite into the tblfavorites table
             // Prepare the statement
             $stmt = mysqli_prepare($conn, "INSERT INTO tblfavorites (user_id, username, book_id) VALUES (?, ?, ?)");
-            $stmt1 = mysqli_prepare($conn, "SELECT user_id, book_id FROM tblfavorites WHERE book_id = ?");
-            mysqli_stmt_bind_param($stmt1, "i", $bookId);
-            mysqli_stmt_execute($stmt1);
-
-            $results = mysqli_stmt_get_result($stmt1);
-
-            mysqli_stmt_close($stmt1);
-
-            $row = mysqli_num_rows($results);
-            
-            if($row > 0){
-                echo "aksdljaslkda";
-            }
-            else{
+        
             if ($stmt) {
                 // Bind the values to the statement
                 if (mysqli_stmt_bind_param($stmt, "isi", $userId, $username, $bookId)) {
                     // Execute the statement
-                    if (!mysqli_stmt_execute($stmt)) {
+                    if (mysqli_stmt_execute($stmt)) {
                         // Success
-                        echo "Error executing statement: " . mysqli_stmt_error($stmt);
-                        
-                    } else {
-                        // Error during execution
                         echo "Statement executed successfully.";
+                        header("location: ../shop.php");
+                        exit();
+                    } else {
+                        // Check for duplicate primary key error
+                        if (mysqli_errno($conn) === 1062) {
+                            // Duplicate primary key error occurred
+                            echo "Duplicate primary key error. This favorite already exists.";
+                        } else {
+                            // Error during execution
+                            echo "Error executing statement: " . mysqli_stmt_error($stmt);
+                        }
                     }
                 } else {
                     // Error binding parameters
                     echo "Error binding parameters: " . mysqli_stmt_error($stmt);
                 }
-
+        
                 mysqli_stmt_close($stmt);
             } else {
                 // Error preparing statement
                 echo "Error preparing statement: " . mysqli_error($conn);
             }
-        }
-
+        }        
 
             header("location: ../shop.php");
             exit();
         }
-    }
     
     function justArrivedAddFavorites($conn, $userId, $username, $bookId){
         if (isset($_POST['favbtn'])) {
-            
             // Insert the favorite into the tblfavorites table
             // Prepare the statement
             $stmt = mysqli_prepare($conn, "INSERT INTO tblfavorites (user_id, username, book_id) VALUES (?, ?, ?)");
-            $stmt1 = mysqli_prepare($conn, "SELECT user_id, book_id FROM tblfavorites WHERE book_id = ?");
-            mysqli_stmt_bind_param($stmt1, "i", $bookId);
-            mysqli_stmt_execute($stmt1);
-
-            $results = mysqli_stmt_get_result($stmt1);
-
-            mysqli_stmt_close($stmt1);
-
-            $row = mysqli_num_rows($results);
-            
-            if($row > 0){
-                echo "aksdljaslkda";
-            }
-            else{
+        
             if ($stmt) {
                 // Bind the values to the statement
                 if (mysqli_stmt_bind_param($stmt, "isi", $userId, $username, $bookId)) {
                     // Execute the statement
-                    if (!mysqli_stmt_execute($stmt)) {
+                    if (mysqli_stmt_execute($stmt)) {
                         // Success
-                        echo "Error executing statement: " . mysqli_stmt_error($stmt);
-                        
-                    } else {
-                        // Error during execution
                         echo "Statement executed successfully.";
+                        header("location: ../shop.php");
+                        exit();
+                    } else {
+                        // Check for duplicate primary key error
+                        if (mysqli_errno($conn) === 1062) {
+                            // Duplicate primary key error occurred
+                            echo "Duplicate primary key error. This favorite already exists.";
+                        } else {
+                            // Error during execution
+                            echo "Error executing statement: " . mysqli_stmt_error($stmt);
+                        }
                     }
                 } else {
                     // Error binding parameters
                     echo "Error binding parameters: " . mysqli_stmt_error($stmt);
                 }
-
+        
                 mysqli_stmt_close($stmt);
             } else {
                 // Error preparing statement
                 echo "Error preparing statement: " . mysqli_error($conn);
             }
         }
-
-
-
+        
             header("location: ../index.php");
             exit();
         }
-    }
     
 
 
