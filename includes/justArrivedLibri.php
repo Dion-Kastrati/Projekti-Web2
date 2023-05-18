@@ -1,14 +1,14 @@
 <?php 
-        $sql = "
-                SELECT *
-                FROM tblbooks
-                LIMIT 8;";
+    $sql = "
+        SELECT *
+        FROM tblbooks
+        WHERE arrival_date >= (SELECT addDate(curdate(), INTERVAL -7 day));";
     $results = mysqli_query($conn, $sql);
     $resultsCheck = mysqli_num_rows($results);
     if ($resultsCheck > 0) {
         while ($row = mysqli_fetch_assoc($results)) { // Krejt te dhenat qe i kemi marr prej $results me i rujt si varch te $row
                 echo "  
-                        <div class='col-lg-4 col-md-6 col-sm-12 pb-1'>
+                        <div class='col-lg-3 col-md-6 col-sm-12 pb-1'>
                         
                             <div class='card product-item border-0 mb-4'>
                                 <div class='card-header product-img position-relative overflow-hidden bg-transparent border p-0'>
@@ -22,7 +22,7 @@
                                 </div>
                             </div>
                             <div class='card-footer d-flex justify-content-between bg-light border'>
-                            <form method='POST' action='includes/libri.inc.php'>
+                            <form method='POST' action='includes/justArrivedLibri.inc.php'>
                                 <input name='book_id' type='hidden' value=".$row['book_id'].">
                                 <button type='submit' name='cartbtn' class='btn btn-sm text-dark p-0'><i class='fas fa-shopping-cart text-primary mr-1'></i>Add To Cart</button>
                                 <button type='submit' name='favbtn' class='btn btn-sm text-dark p-0'><i class='fas fa-solid fa-heart text-primary mr-1'></i>Favorite</button>   

@@ -191,3 +191,162 @@
             }
         }
     }
+
+    function editUserData($conn, $username, $fullname, $email, $password){
+        $usernameExists = usernameExists($conn, $username, $username);
+        $_SESSION['userid'] = $usernameExists["user_id"];
+        if(isset($_POST["save"])){
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $query = "UPDATE tblusers
+                      SET username = '$username', fullname = '$fullname', email = '$email', hashedPassword = '$hashedPassword'
+                      WHERE user_id = ".$_SESSION['userid']."";
+            $resutls = mysqli_query($conn, $query);
+
+            if($results){
+                echo "Data updated successfully";
+            }
+            else {
+                echo "Data not updated";
+            }
+            mysqli_close($conn);
+            
+
+            header("location: ../profile.php?edit=false");
+            exit();
+    }
+}
+
+    //Edit data functions
+
+
+    function emptyInputEdit($fullname, $username, $email, $password, $pwdRepeat){
+        $result;
+        if(empty($fullname) || empty($username) || empty($email) || empty($password) || empty($pwdRepeat)){
+            $result = true;
+        }
+        else{
+            $result = false;
+        }
+        return $result;
+    }
+
+    function changeProfilePic($conn, $profilePic){
+        
+    }
+
+    function addFavorites($conn, $userId, $username, $bookId){
+        if (isset($_POST['favbtn'])) {
+            // Insert the favorite into the tblfavorites table
+            // Prepare the statement
+            $stmt = mysqli_prepare($conn, "INSERT INTO tblfavorites (user_id, username, book_id) VALUES (?, ?, ?)");
+        
+            if ($stmt) {
+                // Bind the values to the statement
+                if (mysqli_stmt_bind_param($stmt, "isi", $userId, $username, $bookId)) {
+                    // Execute the statement
+                    if (mysqli_stmt_execute($stmt)) {
+                        // Success
+                        echo "Statement executed successfully.";
+                        header("location: ../shop.php");
+                        exit();
+                    } else {
+                        // Check for duplicate primary key error
+                        if (mysqli_errno($conn) === 1062) {
+                            // Duplicate primary key error occurred
+                            echo "Duplicate primary key error. This favorite already exists.";
+                        } else {
+                            // Error during execution
+                            echo "Error executing statement: " . mysqli_stmt_error($stmt);
+                        }
+                    }
+                } else {
+                    // Error binding parameters
+                    echo "Error binding parameters: " . mysqli_stmt_error($stmt);
+                }
+        
+                mysqli_stmt_close($stmt);
+            } else {
+                // Error preparing statement
+                echo "Error preparing statement: " . mysqli_error($conn);
+            }
+        }        
+
+            header("location: ../shop.php");
+            exit();
+        }
+    
+    function justArrivedAddFavorites($conn, $userId, $username, $bookId){
+        if (isset($_POST['favbtn'])) {
+            // Insert the favorite into the tblfavorites table
+            // Prepare the statement
+            $stmt = mysqli_prepare($conn, "INSERT INTO tblfavorites (user_id, username, book_id) VALUES (?, ?, ?)");
+        
+            if ($stmt) {
+                // Bind the values to the statement
+                if (mysqli_stmt_bind_param($stmt, "isi", $userId, $username, $bookId)) {
+                    // Execute the statement
+                    if (mysqli_stmt_execute($stmt)) {
+                        // Success
+                        echo "Statement executed successfully.";
+                        header("location: ../shop.php");
+                        exit();
+                    } else {
+                        // Check for duplicate primary key error
+                        if (mysqli_errno($conn) === 1062) {
+                            // Duplicate primary key error occurred
+                            echo "Duplicate primary key error. This favorite already exists.";
+                        } else {
+                            // Error during execution
+                            echo "Error executing statement: " . mysqli_stmt_error($stmt);
+                        }
+                    }
+                } else {
+                    // Error binding parameters
+                    echo "Error binding parameters: " . mysqli_stmt_error($stmt);
+                }
+        
+                mysqli_stmt_close($stmt);
+            } else {
+                // Error preparing statement
+                echo "Error preparing statement: " . mysqli_error($conn);
+            }
+        }
+        
+            header("location: ../index.php");
+            exit();
+        }
+    
+
+
+        function addToCart($conn, $userId, $bookId){
+            
+            if (isset($_POST['cartbtn'])) {
+                // Prepare the statement
+                try {
+                    // Insert into tblcart
+                    $stmt = $conn->prepare("INSERT INTO tblcart (user_id, book_id) VALUES (?, ?)");
+                    $stmt->bind_param("ii", $userId, $bookId);
+                    $stmt->execute();
+                    $stmt->close();
+            
+                    // Update tblbooks quantity
+                    $updateStmt = $conn->prepare("UPDATE tblbooks SET quantity = quantity - 1 WHERE book_id = ?");
+                    $updateStmt->bind_param("i", $bookId);
+                    $updateStmt->execute();
+                    $updateStmt->close();
+            
+                    // Commit the transaction
+                    $conn->commit();
+            
+                    echo "Added to cart successfully.";
+                } catch (Exception $e) {
+                    // Rollback the transaction on error
+                    $conn->rollback();
+            
+                    echo "Error adding to cart: " . $e->getMessage();
+                }
+            
+                // Close the database connection
+                $conn->close();
+            }   
+        }

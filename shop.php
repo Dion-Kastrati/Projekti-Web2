@@ -222,10 +222,7 @@
                                 </nav>
                             </div>
                             <!-- Pagination code end -->
-
-
                         </div>
-
                     </div>
                     <!-- End showing the books -->
 
