@@ -215,23 +215,6 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript">
-    $(".faq-plus").on('click', function () {
-      var faqItem = $(this).closest('.faq-item');
-      var faqBody = faqItem.find('.faq-body');
-      var otherFaqItems = $(".faq-item").not(faqItem);
-      var otherFaqBodies = $(".faq-body").not(faqBody);
-  if (faqBody.is(':visible')) {
-    faqBody.slideUp();
-    $(this).removeClass('active');
-  } else {
-    otherFaqItems.removeClass('active');
-    otherFaqBodies.slideUp();
-    faqBody.slideDown();
-    $(this).addClass('active');
-  }
-});
-  </script>
     
     <!-- Footer Start -->
     <?php
@@ -243,19 +226,39 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
+  <!-- JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+      <!-- Contact Javascript File -->
+  <script src="mail/jqBootstrapValidation.min.js"></script>
+  <script src="mail/contact.js"></script>
 
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+      <!-- Template Javascript -->
+  <script src="js/main.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-  </body>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".faq-plus").on('click', function() {
+        var faqItem = $(this).closest('.faq-item');
+        var faqBody = faqItem.find('.faq-body');
+        var otherFaqItems = $(".faq-item").not(faqItem);
+        var otherFaqBodies = $(".faq-body").not(faqBody);
+
+        if (faqBody.is(':visible')) {
+          faqBody.slideUp();
+          $(this).removeClass('active');
+        } else {
+          otherFaqItems.removeClass('active');
+          otherFaqBodies.slideUp();
+          faqBody.slideDown();
+          $(this).addClass('active');
+        }
+      });
+    });
+  </script>
+</body>
 
 </html>
