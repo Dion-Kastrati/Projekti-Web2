@@ -62,7 +62,7 @@
                 <table class="table table-bordered text-center mb-0">
                     <thead class="bg-secondary text-dark">
                         <tr>
-                            <th>Products</th>
+                            <th>Book Title</th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Total</th>
