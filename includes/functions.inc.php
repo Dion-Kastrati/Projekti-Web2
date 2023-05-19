@@ -154,6 +154,11 @@
         return $result;
     }
 
+    function generateUniqueToken() {
+        return uniqid();
+    }
+    
+
     function loginUser($conn, $username, $password){
         $usernameExists = usernameExists($conn, $username, $username); // Logjika OR ne funksionin me larte me emrin e njejt ne lejon qe njera prej 
                                                                        // dy kushteve te plotesohet qe useri ose te vendos emailin ose usernamein
@@ -180,6 +185,10 @@
             $_SESSION["email"] = $usernameExists["email"];
             $_SESSION["user_role"] = $usernameExists["user_role"];
             $_SESSION["password"] = $password;
+
+            $token = generateUniqueToken(); // Generate a unique token
+        setcookie('auth_token', $token, time() + (1440)); // Set cookie for 1 hour
+
 
             if($usernameExists["user_role"] == "Normal user"){
                 header("Location: ../index.php?");

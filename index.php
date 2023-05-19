@@ -42,12 +42,10 @@
 
 
     <!-- Featured Start -->
-    <?php include 'includes/featured.php'?>
+    <?php include 'includes/featured.php'; ?>
     <!-- Featured End -->
 
-
-    <!-- Products Start -->
-    <div class="container-fluid pt-5">
+    <div class="container-fluid pt-5"> 
         <div class="text-center mb-4">
             <h2 class="section-title px-5"><span class="px-2">Just Arrived</span></h2>
         </div>
@@ -113,6 +111,7 @@
 
             <!-- Template Javascript -->
             <script src="js/main.js"></script>
+            
 </body>
 
 </html>

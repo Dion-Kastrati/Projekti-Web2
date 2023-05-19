@@ -63,7 +63,7 @@
                             echo "No favorite books found.";
                         }
                     } else {
-                        // User is not logged in, handle accordingly
+                        echo "0";
                     }
 
                     ?>

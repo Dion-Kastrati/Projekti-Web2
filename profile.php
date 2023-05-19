@@ -30,6 +30,7 @@
 
     <!-- Costumized design of the page -->
     <link href="./css/profile.css" rel="stylesheet">
+
 </head>
 <body>
     <!-- Top bar start -->
