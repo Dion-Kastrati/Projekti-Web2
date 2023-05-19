@@ -31,7 +31,7 @@
              </div>";
         }
     }
-    else {
-        echo "No books available!";
-    }
+    // else {
+    //     echo "No books available!";
+    // }
 ?>
