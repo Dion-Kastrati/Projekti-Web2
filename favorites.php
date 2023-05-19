@@ -56,7 +56,7 @@
 
 
     <!-- Favorite Books start -->
-    <div class="row px-xl-5 pb-3">
+    <div style="margin:0" class="row px-xl-5 pb-3">
         <?php include "includes/favorites.inc.php" ?>
     </div>
     <!-- Favorite Books end -->
