@@ -63,7 +63,50 @@
   text-align: center;
 }
 
+#error-report-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+#error-description {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: monospace;
+}
+
+#user-email {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#error-report-form button[type="submit"] {
+  color: black;
+  background-color: #c5837c;
+  border-color: #bd726b;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#error-report-form button[type="submit"]:hover {
+  color: #fff;
+  background-color: #c5837c;
+  border-color: #c17a74;}
+
+
   </style>
+  
+  
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="Free HTML Templates" name="keywords">
   <meta content="Free HTML Templates" name="description">
@@ -215,7 +258,14 @@
           </div>
         </div>
       </div>
-    </div>
+      <!-- Error report form -->
+    <form id="error-report-form">
+      <textarea id="error-description" name="error-description" placeholder="Please describe the error or bug"></textarea>
+      <input type="email" id="user-email" name="user-email" placeholder="Your email (optional)">
+      <button type="submit">Report Error</button>
+    </form>
+    <div id="error-report-notification" style="display: none;"></div>
+  </div>
     
     <!-- Footer Start -->
     <?php
@@ -239,6 +289,44 @@
 
       <!-- Template Javascript -->
   <script src="js/main.js"></script>
+
+            
+  <script>
+    $(document).ready(function() {
+      // Capture form submission
+      $('#error-report-form').submit(function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get form data
+        var errorDescription = $('#error-description').val();
+        var userEmail = $('#user-email').val();
+
+        // Create AJAX request
+        $.ajax({
+          type: 'POST',
+          url: 'report-error.php', // Replace with your API endpoint URL
+          data: {
+            errorDescription: errorDescription,
+            userEmail: userEmail
+          },
+          success: function(response) {
+            // Handle success response
+            $('#error-report-notification').text('Report sent');
+            $('#error-report-notification').show();
+
+            // Reset form fields
+            $('#error-description').val('');
+            $('#user-email').val('');
+          },
+          error: function(xhr, status, error) {
+            // Handle error response, if needed
+            console.error('Error reporting error:', error);
+          }
+        });
+      });
+    });
+  </script>
+
 
   <script type="text/javascript">
     $(document).ready(function() {
