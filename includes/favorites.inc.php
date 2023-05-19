@@ -22,7 +22,6 @@
     $results = mysqli_stmt_get_result($stmt);
     mysqli_stmt_close($stmt);
 
-    $row = mysqli_fetch_assoc($results);
     while( $row = mysqli_fetch_assoc($results)){
     echo"
                 <div class='col-lg-3 col-md-6 col-sm-12 pb-1'>
@@ -41,7 +40,8 @@
                     <form method='POST' action='includes/libri.inc.php'>
                         <input name='book_id' type='hidden' value=".$row['book_id'].">
                         <button type='submit' name='cartbtn' class='btn btn-sm text-dark p-0'><i class='fas fa-shopping-cart text-primary mr-1'></i>Add To Cart</button>
-                    </form>
+                        <button type='submit' style='position:relative; left:52%' name='removefav' class='btn btn-sm text-dark p-0'><i class='fas fa-shopping-cart text-primary mr-1'></i>Remove</button>
+                        </form>
             </div>
         </div>
     </div>

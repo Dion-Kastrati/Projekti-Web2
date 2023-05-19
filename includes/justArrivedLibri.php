@@ -27,7 +27,7 @@
                                 echo"<form method='POST' action='includes/libri.inc.php'>";
                                 echo"<input name='book_id' type='hidden' value=".$row['book_id'].">";
                                 echo "<button type='submit' name='cartbtn' class='btn btn-sm text-dark p-0'><i class='fas fa-shopping-cart text-primary mr-1'></i>Add To Cart</button>";
-                                echo "<button type='submit' name='favbtn' class='btn btn-sm text-dark p-0'><i class='fas fa-solid fa-heart text-primary mr-1'></i>Favorite</button> 
+                                echo "<button type='submit' style='position:relative; left:62%' name='favbtn' class='btn btn-sm text-dark p-0'><i class='fas fa-solid fa-heart text-primary mr-1'></i>Favorite</button> 
                            
                             </form>
                     </div>";
