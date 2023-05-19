@@ -170,7 +170,7 @@
                             }
 
                             // Pagination code
-                            $perPage = 2; // Number of books per page
+                            $perPage = 8; // Number of books per page
                             $totalBooks = $resultsCheck;
                             $totalPages = ceil($totalBooks / $perPage);
                             $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
