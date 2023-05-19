@@ -38,7 +38,7 @@ function RegUser() {
 </head>
 <body>
 	<h1>Books</h1>
-    <div class="buttons2">
+    <div style="display:inline-block;" class="buttons2">
     <button class="button-3" onclick="RegUser()">New</button>
     <button class="button-33" onclick="RegUser()">Delete</button>
 
@@ -88,9 +88,9 @@ function RegUser() {
             <th>Arrival Date</th>
 		</tr>
 		<?php
-            $dbServerName = "127.0.0.1";
+            $dbServerName = "localhost:3307";
             $dbUsername = "root";
-            $dbPassword = "admin";
+            $dbPassword = "";
             $dbName = "web2-database";
             
             // Create connection
@@ -99,15 +99,39 @@ function RegUser() {
             $sql = "SELECT * FROM tblbooks;";
             $result = mysqli_query($conn, $sql);
             $resultCheck = mysqli_num_rows($result);
+            $genre;
 
             if ($resultCheck > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
+                  switch($row['genre']){
+                    case 1:
+                      $genre = "Novel";
+                      break;
+                    case 2:
+                      $genre = "Drame";
+                      break;
+                    case 3:
+                      $genre = "Action";
+                      break;
+                    case 4:
+                      $genre = "Thriller";
+                      break;
+                    case 5:
+                      $genre = "Fantasy";
+                      break;
+                    case 6;
+                      $genre = "Mister";
+                      break;
+                    default:
+                      $genre = "Undefined";
+                      break;
+                  }
                     echo "<tr>";
                     echo "<td>" . $row['book_id'] . "</td>";
                     echo "<td>" . $row['book_title'] . "</td>";
                     echo "<td>" . $row['author_id'] . "</td>";
                     echo "<td>" . $row['price'] . "</td>";
-                    echo "<td>" . $row['genre'] . "</td>";
+                    echo "<td>" . $genre . "</td>";
                     echo "<td>" . $row['quantity'] . "</td>";
                     echo "<td>" . $row['year_released'] . "</td>";
                     echo "<td>" . $row['arrival_date'] . "</td>";

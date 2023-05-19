@@ -187,7 +187,7 @@
             $_SESSION["password"] = $password;
 
             $token = generateUniqueToken(); // Generate a unique token
-        setcookie('auth_token', $token, time() + (1440)); // Set cookie for 1 hour
+            setcookie('auth_token', $token, time() + (1440)); // Set cookie for 1 hour
 
 
             if($usernameExists["user_role"] == "Normal user"){

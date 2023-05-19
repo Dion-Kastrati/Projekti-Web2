@@ -3,6 +3,22 @@
 <head>
 	<title>Users</title>
     <link rel="stylesheet" href="UserStyle.css">
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
     <script>
 function RegUser() {
   const form = document.querySelector('.forma');
@@ -37,8 +53,9 @@ function RegUser() {
     </script>
 </head>
 <body>
+
 	<h1>Users</h1>
-    <div class="buttons">
+    <div style="display:inline-block" class="buttons">
     <button class="button-3" onclick="RegUser()">New</button>
     <button class="button-33" onclick="RegUser()">Delete</button>
 
@@ -75,18 +92,18 @@ function RegUser() {
 	<table class="tbl">
 		<tr class="tr">
 			<th>ID</th>
-			<th>Username</th>
-			<th>Full name</th>
-            <th>Email</th>
+      <th>Username</th>
+      <th>Full name</th>
+      <th>Email</th>
 			<th>Password</th>
 			<th>Role</th>
-            <th>Register Date</th>
+      <th>Register Date</th>
 
 		</tr>
 		<?php
-            $dbServerName = "127.0.0.1";
+            $dbServerName = "localhost:3307";
             $dbUsername = "root";
-            $dbPassword = "admin";
+            $dbPassword = "";
             $dbName = "web2-database";
             
             // Create connection
