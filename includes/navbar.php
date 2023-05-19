@@ -36,7 +36,6 @@
                                 <div class="dropdown-menu rounded-0 m-0">
                                     <a href="cart.php" class="dropdown-item">Shopping Cart</a>
                                     <a href="favorites.php" class="dropdown-item">Favorites</a>
-                                    <a href="checkout.php" class="dropdown-item">Checkout</a>
                                 </div>
                             </div>
                             <a href="contact.php" class="nav-item nav-link">Contact</a>

@@ -1,4 +1,5 @@
 <?php 
+
     if(isset($_POST['favbtn'])){
         require_once "../db/db-inc.php";
         require_once "functions.inc.php";
@@ -9,8 +10,7 @@
 
         addFavorites($conn, $userId, $username, $bookId);
         
-    }
-    else{
+    } else{
         header("location: ../shop.php");
         exit();
     }
@@ -18,13 +18,12 @@
     if (isset($_POST['cartbtn'])){
         require "../db/db-inc.php";
         require "functions.inc.php";
-
+        session_start();
         $userId = $_SESSION['userid'];
         $bookId = $_POST['book_id'];
 
         addToCart($conn, $userId, $bookId);
-        }
-    else{
+    } else{
         header("location: ../shop.php");
         exit();
     }
