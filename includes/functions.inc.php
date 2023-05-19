@@ -240,10 +240,6 @@
         return $result;
     }
 
-    function changeProfilePic($conn, $profilePic){
-        
-    }
-
     function addFavorites($conn, $userId, $username, $bookId){
         if (isset($_POST['favbtn'])) {
             // Insert the favorite into the tblfavorites table
@@ -341,62 +337,3 @@
             exit();
         }
     }
-
-
-        function addToCart($conn, $userId, $bookId){
-            if (isset($_POST['cartbtn'])) {                
-                // Prepare the statement to insert into tblcart
-                $stmt = mysqli_prepare($conn, "INSERT INTO tblcart (user_id, book_id) VALUES (?, ?)");
-                
-                if ($stmt) {
-                    // Bind the values to the statement
-                    mysqli_stmt_bind_param($stmt, "ii", $userId, $bookId);
-                    
-                    // Execute the statement
-                    if (mysqli_stmt_execute($stmt)) {
-                        // Success
-                        echo "Book added to the cart successfully.";
-                        mysqli_stmt_close($stmt);
-                        
-                        // Reduce the quantity in stock in tblbooks
-                        $updateStmt = mysqli_prepare($conn, "UPDATE tblbooks SET quantity = quantity - 1 WHERE book_id = ?");
-                        
-                        if ($updateStmt) {
-                            // Bind the book ID to the update statement
-                            mysqli_stmt_bind_param($updateStmt, "i", $bookId);
-                            
-                            // Execute the update statement
-                            if (mysqli_stmt_execute($updateStmt)) {
-                                // Success
-                                echo "Quantity updated successfully.";
-                                mysqli_stmt_close($updateStmt);
-                                header("Location: ../cart.php");
-                                exit();
-                            } else {
-                                // Error executing the update statement
-                                echo "Error updating quantity: " . mysqli_stmt_error($updateStmt);
-                                mysqli_stmt_close($updateStmt);
-                                header("Location: ../cart.php");
-                                exit();
-                            }
-                        } else {
-                            // Error preparing the update statement
-                            echo "Error preparing quantity update statement: " . mysqli_error($conn);
-                            header("Location: ../cart.php");
-                            exit();
-                        }
-                    } else {
-                        // Error executing the insert statement
-                        echo "Error adding book to cart: " . mysqli_stmt_error($stmt);
-                        mysqli_stmt_close($stmt);
-                        header("Location: ../cart.php");
-                        exit();
-                    }
-                } else {
-                    // Error preparing the insert statement
-                    echo "Error preparing insert statement: " . mysqli_error($conn);
-                    header("Location: ../cart.php");
-                    exit();
-                }
-            }
-}   

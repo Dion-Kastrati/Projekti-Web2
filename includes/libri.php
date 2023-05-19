@@ -17,12 +17,13 @@
                             </div>";
                             if(isset($_SESSION['userid'])){
                             echo "<div class='card-footer d-flex justify-content-between bg-light border'>";
-                            
+                                echo"<form method='POST' action='includes/addFromShop.inc.php'>";
+                                echo"<input name='book_id' type='hidden' value=".$row['book_id'].">";
+                                echo "<button type='submit' name='addToCart' class='btn btn-sm text-dark p-0'><i class='fas fa-solid fa-heart text-primary mr-1'></i>Add to Cart</button>                            
+                                </form>";
                                 echo"<form method='POST' action='includes/libri.inc.php'>";
                                 echo"<input name='book_id' type='hidden' value=".$row['book_id'].">";
-                                echo "<button type='submit' name='cartbtn' class='btn btn-sm text-dark p-0'><i class='fas fa-shopping-cart text-primary mr-1'></i>Add To Cart</button>";
-                                echo "<button type='submit' style='position:relative; left:63%' name='favbtn' class='btn btn-sm text-dark p-0'><i class='fas fa-solid fa-heart text-primary mr-1'></i>Favorite</button> 
-                           
+                                echo "<button type='submit' name='favbtn' class='btn btn-sm text-dark p-0'><i class='fas fa-solid fa-heart text-primary mr-1'></i>Favorite</button>                            
                             </form>
                     </div>";
                 }

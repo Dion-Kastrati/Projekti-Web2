@@ -71,7 +71,30 @@
             </a>
             <a href="cart.php" class="btn border">
                 <i class="fas fa-shopping-cart text-primary"></i>
-                <span class="badge">0</span>
+                <span class="badge">
+                <?php
+                    
+                    if (isset($_SESSION['userid'])) {
+                        $loggedInUserID = $_SESSION['userid'];
+                        $sql = "SELECT COUNT(*) AS cartBooks FROM tblcart WHERE user_id = ?";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bind_param("i", $loggedInUserID);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+
+                        if ($result->num_rows > 0) {
+                            $row = $result->fetch_assoc();
+                            $favoriteBooksCount = $row['cartBooks'];
+                            echo $favoriteBooksCount;
+                        } else {
+                            echo "No favorite books found.";
+                        }
+                    } else {
+                        echo "0";
+                    }
+
+                    ?>
+                </span>
             </a>
         </div>
     </div>

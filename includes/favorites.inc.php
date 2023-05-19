@@ -37,11 +37,14 @@
                         </div>
                     </div>
                     <div class='card-footer d-flex justify-content-between bg-light border'>
-                    <form method='POST' action='includes/libri.inc.php'>
+                    <form method='POST' action='includes/addFromFavorites.inc.php'>
                         <input name='book_id' type='hidden' value=".$row['book_id'].">
-                        <button type='submit' name='cartbtn' class='btn btn-sm text-dark p-0'><i class='fas fa-shopping-cart text-primary mr-1'></i>Add To Cart</button>
+                        <button type='submit' name='addToCart' class='btn btn-sm text-dark p-0'><i class='fas fa-shopping-cart text-primary mr-1'></i>Add to Cart</button>
+                    </form>
+                    <form method='POST' action='includes/deleteFromFavorites.inc.php'>
+                        <input name='book_id' type='hidden' value=".$row['book_id'].">
                         <button type='submit' style='position:relative; left:52%' name='removefav' class='btn btn-sm text-dark p-0'><i class='fas fa-shopping-cart text-primary mr-1'></i>Remove</button>
-                        </form>
+                    </form>
             </div>
         </div>
     </div>

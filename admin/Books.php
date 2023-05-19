@@ -66,11 +66,14 @@ function RegUser() {
     <label for="Quantity">Quantity:</label>
     <input type="text" id="Quantity" name="quantity"><br><br>
 
+    <label for="photo">Photo (Online Link):</label>
+    <input type="text" id="photo" name="photo"><br><br>
+
     <label for="Published">Published:</label>
     <input type="text" id="Published" name="year_released"><br><br>
 
     <label for="Arrival">Arrival date:</label>
-    <input type="text" id="Arrival" name="arrival_date"><br><br>
+    <input type="text" id="Arrival" name="arrival_date" value="<?php $t=time(); echo(date("Y-m-d",$t)); ?>"><br><br>
 
     <input class="sub" type="hidden" name="submit" value="submit">
     <input class="sub" type="submit" value="Submit">
@@ -145,11 +148,12 @@ function RegUser() {
                   $author_id = $_POST["author_id"];
                   $price = $_POST["price"];
                   $genre = $_POST["genre"];
+                  $book_photo = $_POST["photo"];
                   $quantity = $_POST["quantity"];
                   $year_released = $_POST["year_released"];
                   $arrival_date = $_POST["arrival_date"];
                 
-                  $sql = "INSERT INTO tblbooks (book_title, author_id, price, genre, quantity,year_released,arrival_date) VALUES ('$book_title', '$author_id', '$price', '$genre', '$quantity','$year_released','$arrival_date')";
+                  $sql = "INSERT INTO tblbooks (book_title, author_id, price, genre,book_photo , quantity,year_released,arrival_date) VALUES ('$book_title', '$author_id', '$price', '$genre', '$book_photo' ,'$quantity','$year_released','$arrival_date')";
                   mysqli_query($conn , $sql);
             
                   // Close the connection

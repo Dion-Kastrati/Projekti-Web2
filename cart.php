@@ -65,68 +65,89 @@
                         <tr>
                             <th>Book Title</th>
                             <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
                             <th>Remove</th>
                         </tr>
                     </thead>
                     <tbody class="align-middle">
-                        <tr>
-                            <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> Colorful
-                                Stylish Shirt</td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center"
-                                        value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i
-                                        class="fa fa-times"></i></button></td>
-                        </tr>
+                    <?php
+                        $userId = $_SESSION['userid'];
+                        include "db/db-inc.php";
+                        $sql = "SELECT c.cart_id, b.book_id, b.book_title, b.price FROM tblcart c
+                                INNER JOIN tblbooks b ON c.book_id = b.book_id
+                                AND user_id = ".$_SESSION['userid'].";";
+
+                        $result = mysqli_query($conn, $sql);
+                        $resultCheck = mysqli_num_rows($result);
+
+                        if ($resultCheck > 0) {
+                        while($row = mysqli_fetch_assoc($result)){ 
+                            echo "
+                            <tr>                            
+                                <td class='align-middle'>".$row['book_title']."</td>
+                                <td class='align-middle'>".$row['price']."€"."</td>
+                                <td class='align-middle'>
+                                    <form method='POST' action = 'includes/deleteFromCart.inc.php'>
+                                    <input type='hidden' name='cartid' value=".$row['cart_id'].">
+                                    <button name='delete' type='submit' class='btn btn-sm btn-primary'>
+                                        <i class='fa fa-times'></i>
+                                    </button>
+                                    </form>
+                                </td>
+                            </tr>";
+                        }
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
             <div class="col-lg-4">
                 <form class="mb-5" action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control p-4" placeholder="Coupon Code">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary">Apply Coupon</button>
-                        </div>
-                    </div>
+                    
                 </form>
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
                         <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-3 pt-1">
-                            <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 class="font-weight-medium">$150</h6>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">$10</h6>
-                        </div>
-                    </div>
                     <div class="card-footer border-secondary bg-transparent">
                         <div class="d-flex justify-content-between mt-2">
                             <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">$160</h5>
+                            <h5 class="font-weight-bold">
+                                <?php
+
+                                    $sql = "SELECT sum(b.price) AS totalPrice FROM tblbooks b
+                                            INNER JOIN tblcart c ON c.book_id = b.book_id
+                                            AND user_id = ".$_SESSION['userid'].";";
+                                    
+                                    $result = mysqli_query($conn, $sql);
+                                    $resultCheck = mysqli_num_rows($result);
+
+                                    if ($resultCheck >= 0) {
+                                        while($row = mysqli_fetch_assoc($result)){ 
+                                            echo $row['totalPrice']."€";
+                                        }
+                                    }
+                                    
+                                ?>
+                            </h5>
                         </div>
-                        <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                        <?php 
+                        $sql = "SELECT * FROM tblcart WHERE user_id = ".$_SESSION['userid'].";";
+                                    
+                                    $result = mysqli_query($conn, $sql);
+                                    $resultCheck = mysqli_num_rows($result);
+
+                                    
+                                    echo"
+                        <form action='includes/buyFromCart.inc.php' method='POST'>";
+                        if ($resultCheck >= 0) {
+                            while($row = mysqli_fetch_assoc($result)){ 
+                                echo "<input type='hidden' name='bookid' value=".$row['book_id'].">";
+                            }
+                        }
+                        echo"
+                        <button name='buy' class='btn btn-block btn-primary my-3 py-3'>Buy</button>
+                        </form>          
+                        ";
+                        ?>
                     </div>
                 </div>
             </div>
