@@ -14,16 +14,3 @@
         header("location: ../shop.php");
         exit();
     }
-
-    if (isset($_POST['cartbtn'])){
-        require "../db/db-inc.php";
-        require "functions.inc.php";
-        session_start();
-        $userId = $_SESSION['userid'];
-        $bookId = $_POST['book_id'];
-
-        addToCart($conn, $userId, $bookId);
-    } else{
-        header("location: ../shop.php");
-        exit();
-    }
