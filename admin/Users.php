@@ -16,41 +16,81 @@
 
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
     <script>
-function RegUser() {
-  const form = document.querySelector('.forma');
+  // Attach event listeners only once
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.querySelector('.button-3');
+    toggleButton.addEventListener('click', toggleForm);
 
-  function toggleForm() {
-    if (form.style.display === 'none') {
-      form.style.display = 'block';
-    } else {
-      form.style.display = 'none';
+    const toggleButton2 = document.querySelector('.button-33');
+    toggleButton2.addEventListener('click', toggleForm2);
+
+    const form = document.querySelector('.forma');
+    const form2 = document.querySelector('#forma2');
+
+    function toggleForm() {
+      if (form.style.display === 'none') {
+        form.style.display = 'block';
+      } else {
+        form.style.display = 'none';
+      }
     }
-  }
-  const toggleButton = document.querySelector('.button-3');
 
-  const form2 = document.querySelector('#forma2');
-
-  function toggleForm2() {
-    if (form2.style.display === 'none') {
-      form2.style.display = 'block';
-    } else {
-      form2.style.display = 'none';
+    function toggleForm2() {
+      if (form2.style.display === 'none') {
+        form2.style.display = 'block';
+      } else {
+        form2.style.display = 'none';
+      }
     }
-  }
 
-  const toggleButton2 = document.querySelector('.button-33');
+    // Handle form submission using Ajax
+    document.querySelector('form.forma').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
 
-  toggleButton.addEventListener('click', toggleForm);
-  toggleButton2.addEventListener('click', toggleForm2);
-}
+      const form = this;
+      const formData = new FormData(form);
 
+      fetch(form.action, {
+        method: form.method,
+        body: formData
+      })
+        .then(response => response.text())
+        .then(data => {
+          // Handle the response (if needed)
+          // You can update the table here
+          location.reload(); // Reload the page to update the table
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
 
+    // Handle form2 submission using Ajax
+    document.querySelector('form#forma2').addEventListener('submit', function(event) {
 
-    </script>
+      const form = this;
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: form.method,
+        body: formData
+      })
+        .then(response => response.text())
+        .then(data => {
+          // Handle the response (if needed)
+          // You can update the table here
+          location.reload(); // Reload the page to update the table
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
+  });
+</script>
 </head>
 <body>
 
@@ -61,7 +101,7 @@ function RegUser() {
 
     </div>
 
-    <form id="forma2" method="POST" action="" style="display: none;">
+    <form id="forma2" method="POST" action="./Users.php" style="display: none;">
     <label for="id">ID to delete:</label>
     <input type="text" name="id" id="id" required>
     <button class="sub" type="submit" name="delete">Delete</button>
@@ -142,23 +182,20 @@ function RegUser() {
             
                 // Close the connection
                 mysqli_close($conn);
-                header("Location: " . $_SERVER['REQUEST_URI']);
         exit();
         
             }
-            if ($_SERVER["REQUEST_METHOD"] === "POST") {
-                if (isset($_POST["delete"])) {
-                    $id = $_POST["id"];
-            
-                    $sql = "DELETE FROM tblusers WHERE user_id = $id";
-                    mysqli_query($conn , $sql);
-            
-                // Close the connection
-                mysqli_close($conn);
-                header("Location: " . $_SERVER['REQUEST_URI']);
-        exit();
-                }
-            }
+            if (isset($_POST['delete'])) {
+              $id = $_POST["id"];
+          
+              $sql = "DELETE FROM tblusers WHERE user_id = $id";
+              mysqli_query($conn, $sql);
+          
+              // Close the connection
+              mysqli_close($conn);
+
+              exit();
+          }
             
 		?>
 	</table>
