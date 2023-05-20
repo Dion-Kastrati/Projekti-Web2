@@ -7,10 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userEmail = $_POST['userEmail'];
 
     // Database configuration
-    $dbServerName = "localhost"; // Replace with your database server name
-    $dbUsername = "root"; // Replace with your database username
-    $dbPassword = "AhaHxG12@S*&"; // Replace with your database password
-    $dbName = "web2-database1"; // Replace with your database name
+    $dbServerName = "localhost:3307";
+    $dbUsername = "root";
+    $dbPassword = "";
+    $dbName = "web2-database";
 
     // Create a connection to the database
     $conn = new mysqli($dbServerName, $dbUsername, $dbPassword, $dbName);
