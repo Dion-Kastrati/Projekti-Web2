@@ -3,9 +3,11 @@
 <head>
 	<title>Books</title>
     <link rel="stylesheet" href="UserStyle.css">
+	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-function RegUser() {
+	    function RegUser() {
   const form = document.querySelector('.forma');
+  const form2 = document.querySelector('#forma2');
 
   function toggleForm() {
     if (form.style.display === 'none') {
@@ -14,9 +16,6 @@ function RegUser() {
       form.style.display = 'none';
     }
   }
-  const toggleButton = document.querySelector('.button-3');
-
-  const form2 = document.querySelector('#forma2');
 
   function toggleForm2() {
     if (form2.style.display === 'none') {
@@ -26,14 +25,62 @@ function RegUser() {
     }
   }
 
+  const toggleButton = document.querySelector('.button-3');
   const toggleButton2 = document.querySelector('.button-33');
 
   toggleButton.addEventListener('click', toggleForm);
   toggleButton2.addEventListener('click', toggleForm2);
+
+  // Check if the submit event listeners are already attached
+  if (!form.dataset.submitListenerAttached) {
+    // Handle form submission using Ajax
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: form.method,
+        body: formData
+      })
+        .then(response => response.text())
+        .then(data => {
+          // Handle the response (if needed)
+          // You can update the table here
+          location.reload(); // Reload the page to update the table
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
+
+    // Mark the form with a custom attribute to indicate the listener is attached
+    form.dataset.submitListenerAttached = true;
+  }
+
+  // Check if the submit event listeners are already attached
+  if (!form2.dataset.submitListenerAttached) {
+    // Handle form2 submission using Ajax
+    form2.addEventListener('submit', function(event) {
+      const formData = new FormData(form2);
+
+      fetch(form2.action, {
+        method: form2.method,
+        body: formData
+      })
+        .then(response => response.text())
+        .then(data => {
+
+          location.reload(); // Reload the page to update the table
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
+
+    form2.dataset.submitListenerAttached = true;
+  }
 }
-
-
-
     </script>
 </head>
 <body>
@@ -44,7 +91,7 @@ function RegUser() {
 
     </div>
 
-    <form id="forma2" method="POST" action="" style="display: none;">
+    <form id="forma2" method="POST" action="./Books.php" style="display: none;">
     <label for="id">ID to delete:</label>
     <input type="text" name="id" id="id" required>
     <button class="sub" type="submit" name="delete">Delete</button>
@@ -158,26 +205,20 @@ function RegUser() {
             
                   // Close the connection
                   mysqli_close($conn);
-                  header("Location: " . $_SERVER['REQUEST_URI']);
           exit();
           
               } else {
-                  // Handle the case when one or more of the required form fields are missing
-                  // Display an error message or perform appropriate actions
+                 
               }
           }
-          if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            if (isset($_POST["delete"])) {
-                $id = $_POST["id"];
+           if (isset($_POST['delete'])) {
+            $id = $_POST["id"];
         
-                $sql = "DELETE FROM tblbooks WHERE book_id = $id";
-                mysqli_query($conn , $sql);
-        
-            // Close the connection
+            $sql = "DELETE FROM tblbooks WHERE book_id = $id";
+            mysqli_query($conn, $sql);
             mysqli_close($conn);
-            header("Location: " . $_SERVER['REQUEST_URI']);
-    exit();
-            }
+
+            exit();
         }
           
 		?>
