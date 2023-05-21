@@ -337,3 +337,96 @@
             exit();
         }
     }
+function createSendEmail(){
+    require __DIR__ . '/vendor/autoload.php';
+
+    $credentialsPath = "C:\Users\Admin\Desktop\client_secret_838510638977-gchqcq492gu7ue3st54i7cdqki1dgm7t.apps.googleusercontent.com.json";
+
+    function getClient($credentialsPath, $clientId, $clientSecret)
+    {
+        $client = new Google\Client();
+        $client->setApplicationName('Gmail API PHP');
+        $client->setScopes(Google\Service\Gmail::MAIL_GOOGLE_COM);
+        $client->setAuthConfig($credentialsPath);
+        $client->setAccessType('offline');
+        $client->setPrompt('select_account consent');
+        $client->setClientId($clientId);
+        $client->setClientSecret($clientSecret);
+    
+        $tokenPath = 'path/to/token.json';
+        if (file_exists($tokenPath)) {
+            $accessToken = json_decode(file_get_contents($tokenPath), true);
+            $client->setAccessToken($accessToken);
+        } else {
+            // If no token found, initiate the authorization flow
+            $authUrl = $client->createAuthUrl();
+            header('Location: ' . $authUrl);
+            exit;
+        }
+    
+        // Refresh the token if it's expired
+        if ($client->isAccessTokenExpired()) {
+            $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+            file_put_contents($tokenPath, json_encode($client->getAccessToken()));
+        }
+    
+        return $client;
+    }
+}
+    /**
+     * $sender derguesi i emailes.
+     * $recipient marresi.
+     * $subject Email subject.
+     * $message Email body message.
+     */
+    function createMessage($sender, $recipient, $subject, $message)
+    {
+        $email = 'From: ' . $sender . "\r\n";
+        $email .= 'To: ' . $recipient . "\r\n";
+        $email .= 'Subject: ' . $subject . "\r\n";
+        $email .= 'MIME-Version: 1.0' . "\r\n";
+        $email .= 'Content-Type: text/plain; charset=utf-8' . "\r\n";
+        $email .= 'Content-Transfer-Encoding: 7bit' . "\r\n\r\n";
+        $email .= $message;
+    
+        return base64url_encode($email);
+    }
+    
+    /**
+     *
+     * $data The data to encode with Base64.
+     * 
+     */
+    function base64url_encode($data)
+    {
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    }
+    
+    function sendEmail($credentialsPath, $clientId, $clientSecret, $recipientEmail, $username, $password)
+{
+    $client = getClient($credentialsPath, $clientId, $clientSecret);
+    
+    // Define your email and the login notification message
+    $senderEmail = 'dion.kastrati@student.uni-pr.edu';
+    $subject = 'Login Notification';
+    $message = 'You have successfully logged in to your account.';
+    
+    // Create the Gmail service
+    $service = new Google\Service\Gmail($client);
+    
+    // Prepare the email
+    $email = new Google\Service\Gmail\Message();
+    $email->setRaw(createMessage($senderEmail, $recipientEmail, $subject, $message));
+    
+    // Send the email
+    $service->users_messages->send('me', $email);
+    
+    echo 'Login notification sent successfully!';
+}
+
+function loginUserAndSendEmail($conn, $username, $password, $credentialsPath, $clientId, $clientSecret, $recipientEmail)
+{
+    loginUser($conn, $username, $password);
+    sendEmail($credentialsPath, $clientId, $clientSecret, $recipientEmail, $username, $password);
+
+    }

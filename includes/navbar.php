@@ -31,16 +31,23 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="index.php" class="nav-item nav-link">Home</a>
                             <a href="shop.php" class="nav-item nav-link">Books</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="cart.php" class="dropdown-item">Shopping Cart</a>
-                                    <a href="favorites.php" class="dropdown-item">Favorites</a>
-                                </div>
-                            </div>
-                            <a href="contact.php" class="nav-item nav-link">Contact</a>
                             <?php 
                             
+                            if(isset($_SESSION["userid"])){
+                            echo "<div class='nav-item dropdown'>
+                                <a href='#' class='nav-link dropdown-toggle' data-toggle='dropdown'>Pages</a>
+                                <div class='dropdown-menu rounded-0 m-0'>
+                                    <a href='cart.php' class='dropdown-item'>Shopping Cart</a>
+                                    <a href='favorites.php' class='dropdown-item'>Favorites</a>
+                                </div>
+                            </div>
+                            <a href='contact.php' class='nav-item nav-link'>Contact</a>";
+                            }
+                            else{
+                                echo "<p class='nav-link dropdown-toggle' style='position:relative; left:10px; color:rgb(166, 165, 165)'> Pages </p>"; 
+                                echo "<p style='position:relative; top:20px; left:20px; color:rgb(166, 165, 165)'> Contact </p>"; 
+                                echo "<p style='position:relative; top:20px; left:40px; color:rgb(166, 165, 165)'> Dashboard </p>"; 
+                            }
                             if(isset($_SESSION["userid"])){
                                 if($_SESSION["user_role"] == "Admin"){
                                 echo "<a href='admin/adminDashboard.php' class='nav-item nav-link'>Dashboard</a>";
