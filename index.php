@@ -26,6 +26,18 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+    .quoteContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 50px;
+    width: 80%;
+    border: 1px solid grey;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+</style>
 </head>
 
 <body>
@@ -34,7 +46,7 @@
     include 'includes/topbar.php';
     ?>
     <!-- Topbar End -->
-
+        <script src="Api.js" type="module"></script>
 
     <!-- Navbar Start -->
         <?php include "./includes/navbar.php"; ?>
@@ -44,7 +56,10 @@
     <!-- Featured Start -->
     <?php include 'includes/featured.php'; ?>
     <!-- Featured End -->
-
+     <div class="quoteContainer">
+        <div id="quote"></div>
+        <div id="author"></div>
+      </div>
     <div class="container-fluid pt-5"> 
         <div class="text-center mb-4">
             <h2 class="section-title px-5"><span class="px-2">Just Arrived</span></h2>
