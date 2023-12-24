@@ -402,8 +402,8 @@ function createSendEmail(){
         return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
     }
     
-    function sendEmail($credentialsPath, $clientId, $clientSecret, $recipientEmail, $username, $password)
-{
+    function sendEmail($credentialsPath, $clientId, $clientSecret, $recipientEmail, $username, $password){
+
     $client = getClient($credentialsPath, $clientId, $clientSecret);
     
     // Define your email and the login notification message

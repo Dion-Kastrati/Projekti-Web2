@@ -43,7 +43,7 @@
                     </form>
                     <form method='POST' action='includes/deleteFromFavorites.inc.php'>
                         <input name='book_id' type='hidden' value=".$row['book_id'].">
-                        <button type='submit' style='position:relative; left:52%' name='removefav' class='btn btn-sm text-dark p-0'><i class='fas fa-shopping-cart text-primary mr-1'></i>Remove</button>
+                        <button type='submit' style='position:relative;' name='removefav' class='btn btn-sm text-dark p-0'><i class='fas fa-shopping-cart text-primary mr-1'></i>Remove</button>
                     </form>
             </div>
         </div>

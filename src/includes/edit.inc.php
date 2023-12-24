@@ -9,7 +9,7 @@
         $email = $_POST["email"];
         $password = $_POST["password"];
         $pwdRepeat = $_POST["pwdRepeat"];
-        $profilePic = $_POST["profilePic"];
+        // $profilePic = $_POST["profilePic"];
 
 
         if(emptyInputEdit($fullname, $username, $email, $password, $pwdRepeat) !== false){
