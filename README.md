@@ -1,4 +1,4 @@
-# Projekti Web 2
+# Libraria Online
 
 ## Rreth projektit
 
